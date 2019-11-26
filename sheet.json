@@ -1,0 +1,8 @@
+{
+	"html": "charsheet_RMSS.html",
+	"css": "charsheet_RMSS.css",
+	"authors": "Diana P.",
+	"preview": "charsheet_rmss.jpg",
+	"roll20userid": "108188",
+	"instructions": "Set up tab allows choice of which calculations and fills to automate.  Space provided to add custom skills or other skills at the bottom of the skill tab.  \n\n* NPC toggle switches to NPC/Monster sheet with space for all fields from Creatures & Monsters as well as a field to allow JSON import of a creature.  Example JSON import included.  \n* Roll Template toggle shows information about the embedded roll templates.  \n\n* Should also work for RMFRP.  "
+}
