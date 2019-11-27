@@ -9027,34 +9027,6 @@
 									<option value="5" data-i18n="armor-clothing-no-encumbrance">Armor/Clothing (does not encumber)</option>
 								</select></span>
 							</div>
-							<div class="table-row">
-								<!--span class="table-data">othernone<br>worn<br>pack<br>stash<br>armorclothing
-								</span-->
-								<span class="table-data">
-									<input type="hidden" name="attr_coin1othernone" title="coin1othernone" value="0" />
-									<input type="hidden" name="attr_coin1worn" title="coin1worn" value="0" />
-									<input type="hidden" name="attr_coin1pack" title="coin1pack" value="0" />
-									<input type="hidden" name="attr_coin1stash1" title="coin1stash1" value="0" />
-									<input type="hidden" name="attr_coin1stash2" title="coin1stash2" value="0" />
-									<input type="hidden" name="attr_coin1armorclothing" title="coin1armorclothing" value="0" />
-								</span>
-								<span class="table-data">
-									<input type="hidden" name="attr_coin2othernone" title="coin2othernone" value="0" />
-									<input type="hidden" name="attr_coin2worn" title="coin2worn" value="0" />
-									<input type="hidden" name="attr_coin2pack" title="coin2pack" value="0" />
-									<input type="hidden" name="attr_coin2stash1" title="coin2stash1" value="0" />
-									<input type="hidden" name="attr_coin2stash2" title="coin2stash2" value="0" />
-									<input type="hidden" name="attr_coin2armorclothing" title="coin2armorclothing" value="0" />
-								</span>
-								<span class="table-data">
-									<input type="hidden" name="attr_coin3othernone" title="coin3othernone" value="0" />
-									<input type="hidden" name="attr_coin3worn" title="coin3worn" value="0" />
-									<input type="hidden" name="attr_coin3pack" title="coin3pack" value="0" />
-									<input type="hidden" name="attr_coin3stash1" title="coin3stash1" value="0" />
-									<input type="hidden" name="attr_coin3stash2" title="coin3stash2" value="0" />
-									<input type="hidden" name="attr_coin3armorclothing" title="coin3armorclothing" value="0" />
-								</span>
-							</div>
 						</div>
 					</span>
 					<span class="table-center">
@@ -9125,13 +9097,7 @@
 							<option value="5" data-i18n="armor-clothing-no-encumbrance">Armor/Clothing (does not encumber)</option>
 						</select></span>
 						<span class="table-data-center-bottom" style="width: 50px;"><input type="text" style="width: 50px;" name="attr_equipmentlocation"/ title="repeating_equipment_#_equipmentlocation" /></span>
-						<span class="table-data-center-bottom" style="width: 350px;"><textarea style="height: 18px; width: 350px;" name="attr_equipmentnotes" title="repeating_equipment_#_equipmentnotes" ></textarea>
-							<input type="hidden" style="width: 35px;" name="attr_othernone" title="othernone" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_worn" title="worn" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_pack" title="pack" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_stash1" title="stash1" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_stash2" title="stash2" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_armorclothing" title="armorclothing" value="0" /></span>
+						<span class="table-data-center-bottom" style="width: 350px;"><textarea style="height: 18px; width: 350px;" name="attr_equipmentnotes" title="repeating_equipment_#_equipmentnotes" ></textarea></span>
 					</div>
 				</div>
 			</fieldset>
@@ -11081,6 +11047,8 @@ A8:@{npcattack8notes} }} </textarea>
 
 <!-- start Sheet Workers Script section-->
 <script type="text/worker">
+
+/* eslint-disable no-console */
 
 // <!-- Stat Mod Calculation -->
 function StatMod(stat) {
