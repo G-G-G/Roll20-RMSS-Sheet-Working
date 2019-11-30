@@ -14475,7 +14475,6 @@ on('change:repeating_exp remove:repeating_exp', function(){
 });
 // based on: http://screencast.com/t/U9bVwYAH3
 
-// gigs why are total xp and expcurrent different? do you need a max value?
 //  <!---- Copy experience from totalexperience to expcurrent on PC/Char tab if wanted ---->
 on('change:totalexperience change:xpcopy', function() {
     getAttrs(['totalexperience', 'xpcopy', 'expcurrent', 'expcurrent_max', 'totalexperience_max'], function(values) {
@@ -14649,6 +14648,23 @@ on('change:weightcarried change:weightcarriedcopy change:weightbackpack change:w
             if (values.weightstored1copy == 1) {newtotal += +values.weightstored1 || 0;}
             if (values.weightstored2copy == 1) {newtotal += +values.weightstored2 || 0;}
             setAttrs({ 'totalweightcarried': Math.round(newtotal *100)/100 });
+        }
+    });
+});
+
+/* <!----- Close other skill categories when one is open to help with lag -----> */
+const categories = ['armor', 'artistic', 'athletic', 'awareness', 'bodydev', 'combatman', 'communications', 'crafts', 'dirspells', 'influence',
+    'lore', 'martialarts', 'outdoor', 'power', 'powerpointdev', 'science', 'selfcontrol', 'special', 'spellsskills', 'subterfuge', 'technical',
+    'urban', 'weapon', 'other'];
+categories.forEach(cat => {
+    const fullcat = `skill${cat}-show`;
+    on(`change:${fullcat}`, function(event) {
+        if(event.newValue == 1) {
+            const upgrade = categories.reduce((obj,category) => {
+                if(category != cat) obj[`skill${category}-show`] = 0;
+                return obj;
+            }, {});
+            setAttrs(upgrade);
         }
     });
 });
