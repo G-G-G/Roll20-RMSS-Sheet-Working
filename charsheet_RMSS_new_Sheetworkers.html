@@ -11087,14 +11087,14 @@ function GenSkillMod(rank, prog0, prog10, prog20, prog30, prog31) {
         mod = rank * prog10;
         //		  mod = rank * 3;
     } else if (rank < 21) {
-        mod = (10 * prog10) + Math.floor((rank-10) * prog20);
+        mod = Math.round((10 * prog10) + ((rank-10) * prog20));
         //		  mod = 10 + (rank * 2);
     } else if (rank < 31) {
-        mod = (10 * prog10) + Math.floor(10 * prog20) + Math.floor((rank-20) * prog30);
+        mod = Math.round((10 * prog10) + (10 * prog20) + ((rank-20) * prog30));
         //		  mod = 30 + rank;
     } else if (rank > 30) {
-        mod = (10 * prog10) + Math.floor(10 * prog20) + Math.floor(10 * prog30) + Math.floor((rank - 30) * prog31);
-        //		  mod = 45 + Math.floor(rank / 2);
+        mod = Math.round((10 * prog10) + (10 * prog20) + (10 * prog30) + ((rank - 30) * prog31));
+        //		  mod = 45 + Math.round(rank / 2);
     }
     //	  console.log('/* ----------leaving GenSkillMod mod:'+mod+'------------ */');
     return mod;  
