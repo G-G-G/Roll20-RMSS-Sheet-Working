@@ -1,10 +1,10 @@
 <!-- RoleMaster Standard System Character Sheet -->
 <!-- by Diana P. -->
 <!-- I borrowed some code/equations from Brian. And Sam. And Aaron I. And others -->
-<!-- Version 2.4.17 (full nested calculations; sheet helpers; tables to div/spans; removed sheet-.; copy armor) dated 11/24/2019 -->
+<!-- Version 2.4.19 (sheetworker optimization) dated 04/15/2020 -->
 <input type="hidden" name="attr_character_sheet" title="character-sheet" value="RMSS-FullCalcs"/>
-<input type="hidden" name="attr_currentsheetversion" title="currentsheetversion" value="4.17" />
-<p style="font-size: 0.6em;">V2.<span name="attr_sheetversion" title="sheetversion" ></span> 11/24/2019 by Diana P.</p>
+<input type="hidden" name="attr_currentsheetversion" title="currentsheetversion" value="4.19" />
+<p style="font-size: 0.6em;">V2.<span name="attr_sheetversion" title="sheetversion" ></span> 04/15/2020 by Diana P.</p>
 <input type="checkbox" class="announcement-show cbox" title="announcement-show" name="attr_announcement-show" value="1" checked />
 <div class="announcement">
 	<div class="table-style">
@@ -25,7 +25,7 @@
 <!-- start PC section -->
     <div class="1colrow">
         <div style="text-align: center;">
-		<h1><span style="font-weight: bold;"><img src="http://i.imgur.com/Wc2yuQ7.png" style="float: center;" /></span></h1>
+		<h1><span style="font-weight: bold;"><img src="https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Rolemaster-Standard-System/RMSS_Charsheet_Banner.png" style="float: center;" /></span></h1>
 		</div>
 	</div>
 	<hr/>
@@ -9027,34 +9027,6 @@
 									<option value="5" data-i18n="armor-clothing-no-encumbrance">Armor/Clothing (does not encumber)</option>
 								</select></span>
 							</div>
-							<div class="table-row">
-								<!--span class="table-data">othernone<br>worn<br>pack<br>stash<br>armorclothing
-								</span-->
-								<span class="table-data">
-									<input type="hidden" name="attr_coin1othernone" title="coin1othernone" value="0" />
-									<input type="hidden" name="attr_coin1worn" title="coin1worn" value="0" />
-									<input type="hidden" name="attr_coin1pack" title="coin1pack" value="0" />
-									<input type="hidden" name="attr_coin1stash1" title="coin1stash1" value="0" />
-									<input type="hidden" name="attr_coin1stash2" title="coin1stash2" value="0" />
-									<input type="hidden" name="attr_coin1armorclothing" title="coin1armorclothing" value="0" />
-								</span>
-								<span class="table-data">
-									<input type="hidden" name="attr_coin2othernone" title="coin2othernone" value="0" />
-									<input type="hidden" name="attr_coin2worn" title="coin2worn" value="0" />
-									<input type="hidden" name="attr_coin2pack" title="coin2pack" value="0" />
-									<input type="hidden" name="attr_coin2stash1" title="coin2stash1" value="0" />
-									<input type="hidden" name="attr_coin2stash2" title="coin2stash2" value="0" />
-									<input type="hidden" name="attr_coin2armorclothing" title="coin2armorclothing" value="0" />
-								</span>
-								<span class="table-data">
-									<input type="hidden" name="attr_coin3othernone" title="coin3othernone" value="0" />
-									<input type="hidden" name="attr_coin3worn" title="coin3worn" value="0" />
-									<input type="hidden" name="attr_coin3pack" title="coin3pack" value="0" />
-									<input type="hidden" name="attr_coin3stash1" title="coin3stash1" value="0" />
-									<input type="hidden" name="attr_coin3stash2" title="coin3stash2" value="0" />
-									<input type="hidden" name="attr_coin3armorclothing" title="coin3armorclothing" value="0" />
-								</span>
-							</div>
 						</div>
 					</span>
 					<span class="table-center">
@@ -9125,13 +9097,7 @@
 							<option value="5" data-i18n="armor-clothing-no-encumbrance">Armor/Clothing (does not encumber)</option>
 						</select></span>
 						<span class="table-data-center-bottom" style="width: 50px;"><input type="text" style="width: 50px;" name="attr_equipmentlocation"/ title="repeating_equipment_#_equipmentlocation" /></span>
-						<span class="table-data-center-bottom" style="width: 350px;"><textarea style="height: 18px; width: 350px;" name="attr_equipmentnotes" title="repeating_equipment_#_equipmentnotes" ></textarea>
-							<input type="hidden" style="width: 35px;" name="attr_othernone" title="othernone" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_worn" title="worn" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_pack" title="pack" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_stash1" title="stash1" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_stash2" title="stash2" value="0" />
-							<input type="hidden" style="width: 35px;" name="attr_armorclothing" title="armorclothing" value="0" /></span>
+						<span class="table-data-center-bottom" style="width: 350px;"><textarea style="height: 18px; width: 350px;" name="attr_equipmentnotes" title="repeating_equipment_#_equipmentnotes" ></textarea></span>
 					</div>
 				</div>
 			</fieldset>
@@ -11082,7 +11048,10 @@ A8:@{npcattack8notes} }} </textarea>
 <!-- start Sheet Workers Script section-->
 <script type="text/worker">
 
+/* eslint-disable no-console */
+
 // <!-- Stat Mod Calculation -->
+// Takes Stat total, returns bonus (base bonus).
 function StatMod(stat) {
     let mod = 0;
     if (stat < 11) {
@@ -11102,12 +11071,14 @@ function StatMod(stat) {
 }
   
 // <!-- Stat Calculation -->
+// Takes base stat, racial bonus, special bonus, returns total bonus.
 function StatCalc(base, racial, special) {
     return base + racial + special;
 
 }
   
 // <!-- Generic Skill - Rank Bonus Calculation -->
+// takes skill rank and progression and returns rank bonus
 function GenSkillMod(rank, prog0, prog10, prog20, prog30, prog31) {
     let mod = 0;
     //	  console.log('/* ----------inside GenSkillMod rank:'+rank+'------------ */');
@@ -11119,20 +11090,21 @@ function GenSkillMod(rank, prog0, prog10, prog20, prog30, prog31) {
         mod = rank * prog10;
         //		  mod = rank * 3;
     } else if (rank < 21) {
-        mod = (10 * prog10) + Math.floor((rank-10) * prog20);
+        mod = Math.round((10 * prog10) + ((rank-10) * prog20));
         //		  mod = 10 + (rank * 2);
     } else if (rank < 31) {
-        mod = (10 * prog10) + Math.floor(10 * prog20) + Math.floor((rank-20) * prog30);
+        mod = Math.round((10 * prog10) + (10 * prog20) + ((rank-20) * prog30));
         //		  mod = 30 + rank;
     } else if (rank > 30) {
-        mod = (10 * prog10) + Math.floor(10 * prog20) + Math.floor(10 * prog30) + Math.floor((rank - 30) * prog31);
-        //		  mod = 45 + Math.floor(rank / 2);
+        mod = Math.round((10 * prog10) + (10 * prog20) + (10 * prog30) + ((rank - 30) * prog31));
+        //		  mod = 45 + Math.round(rank / 2);
     }
     //	  console.log('/* ----------leaving GenSkillMod mod:'+mod+'------------ */');
     return mod;  
 }
   
 // <!-- Body Dev Progression Setup -->
+// takes racial index (my value) and progression index and returns current rank modifier.  Passes through the current value if the race is set to "custom" rather than one of the premades
 function BodyDevProgMod(racialindex, pindex, currentval) {
     let mod = 0;
     //	  console.log('/* ----------inside BodyDevProgMod rank:'+racialindex+'------------ */');
@@ -11220,6 +11192,7 @@ function BodyDevProgMod(racialindex, pindex, currentval) {
 }
   
 // <!-- Set Realm -->
+// takes realm selection, in mod, em mod, and pr mod and returns proper realm bonus depending upon selected realm and current stats.
 function SetRealm(rselect, intmod, empmod, premod) {
     let mod = 0;
     //	  console.log('/* ----------entering SetRealmMod mod:'+mod+' rselect:'+rselect+' intmod:'+intmod+' empmod:'+empmod+' premod:'+premod+'------------ */');
@@ -11243,6 +11216,7 @@ function SetRealm(rselect, intmod, empmod, premod) {
 }
   
 // <!-- Power Point Dev Progression Setup -->
+// takes realm selection, racial index (my value), and progression index and returns current rank modifier.  Passes through the current value if the race is set to "custom" rather than one of the premades
 function PPDevProgMod(rselect, racialindex, pindex, currentval) {
     let mod = 0;
     //	  console.log('/* ----------entering PPDevProgMod rselect:'+rselect+' racialindex:'+racialindex+' pindex:'+pindex+' mod:'+mod+'------------ */');
@@ -11365,6 +11339,7 @@ function PPDevProgMod(rselect, racialindex, pindex, currentval) {
 }
   
 // <!-- Race Fixed Info (Stat, RR bonuses + Soul Departure/Recovery Multiplier) Setup -->
+// takes racial index and a value index for which stat/resistance/etc and returns the value for that race.  Passes through the current value if race is set to a non-supported/custom race.
 function RaceFixedInfoSetup(racialindex, index, currentval) {
     let mod = 0;
     //	  console.log('/* ----------inside RaceFixedInfoSetup rank:'+racialindex+'------------ */');
@@ -11647,6 +11622,7 @@ function RaceFixedInfoSetup(racialindex, index, currentval) {
 }
   
 // <!-- Profession Bonus for Skill Categories Setup -->
+// takes a profession index and an index for which skill category and returns Profession bonus for that skill/profession combo.
 function ProfessionInfoSetup(professionindex, index, currentval) {
     let mod = 0;
     //	  console.log('/* ----------inside ProfessionInfoSetup professionindex:'+professionindex+' index:'+index+' currentval:'+currentval+'------------ */');
@@ -11935,58 +11911,49 @@ function DropdownStatChange(statname) {
 
 // <!---- Copy Armor from Primary/Secondary/Tertiary to Worn ---->
 on('change:activearmor', function() {
-    getAttrs(['activearmor'], function(values) {
+    getAttrs(['activearmor', 'atactual1', 'at1', 'dbpweight1', 'dbweightpen1', 'dbmisspen1', 'dbarmdb1', 'dbquickpen1', 'dbshield1', 'dbshieldranged1', 'dbshielddb1', 'dbmagicbon1', 'atactual2', 'at2', 'dbpweight2', 'dbweightpen2', 'dbmisspen2', 'dbarmdb2', 'dbquickpen2', 'dbshield2', 'dbshieldranged2', 'dbshielddb2', 'dbmagicbon2', 'atactual3', 'at3', 'dbpweight3', 'dbweightpen3', 'dbmisspen3', 'dbarmdb3', 'dbquickpen3', 'dbshield3', 'dbshieldranged3', 'dbshielddb3', 'dbmagicbon3'], function(values) {
+		const output = {};
         if (parseInt(values.activearmor) == 1){
-            getAttrs(['atactual1', 'at1', 'dbpweight1', 'dbweightpen1', 'dbmisspen1', 'dbarmdb1', 'dbquickpen1', 'dbshield1', 'dbshieldranged1', 'dbshielddb1', 'dbmagicbon1'], function(values) {
-                setAttrs({
-                    atactualworn: values.atactual1,
-                    atworn: values.at1,
-                    dbpweightworn: values.dbpweight1,
-                    dbweightpenworn: values.dbweightpen1,
-                    dbmisspenworn: values.dbmisspen1,
-                    dbarmdbworn: values.dbarmdb1,
-                    dbquickpenworn: values.dbquickpen1,
-                    dbshieldworn: values.dbshield1,
-                    dbshieldrangedworn: values.dbshieldranged1,
-                    dbshielddbworn: values.dbshielddb1,
-                    dbmagicbonworn: values.dbmagicbon1
-                });
-            });
+			output['atactualworn']= values.atactual1;
+			output['atworn']= values.at1;
+			output['dbpweightworn']= values.dbpweight1;
+			output['dbweightpenworn']= values.dbweightpen1;
+			output['dbmisspenworn']= values.dbmisspen1;
+			output['dbarmdbworn']= values.dbarmdb1;
+			output['dbquickpenworn']= values.dbquickpen1;
+			output['dbshieldworn']= values.dbshield1;
+			output['dbshieldrangedworn']= values.dbshieldranged1;
+			output['dbshielddbworn']= values.dbshielddb1;
+			output['dbmagicbonworn']= values.dbmagicbon1;
         } else if (parseInt(values.activearmor) == 2){
-            getAttrs(['atactual2', 'at2', 'dbpweight2', 'dbweightpen2', 'dbmisspen2', 'dbarmdb2', 'dbquickpen2', 'dbshield2', 'dbshieldranged2', 'dbshielddb2', 'dbmagicbon2'], function(values) {
-                setAttrs({
-                    atactualworn: values.atactual2,
-                    atworn: values.at2,
-                    dbpweightworn: values.dbpweight2,
-                    dbweightpenworn: values.dbweightpen2,
-                    dbmisspenworn: values.dbmisspen2,
-                    dbarmdbworn: values.dbarmdb2,
-                    dbquickpenworn: values.dbquickpen2,
-                    dbshieldworn: values.dbshield2,
-                    dbshieldrangedworn: values.dbshieldranged2,
-                    dbshielddbworn: values.dbshielddb2,
-                    dbmagicbonworn: values.dbmagicbon2
-                });
-            });
+			output['atactualworn']= values.atactual2;
+			output['atworn']= values.at2;
+			output['dbpweightworn']= values.dbpweight2;
+			output['dbweightpenworn']= values.dbweightpen2;
+			output['dbmisspenworn']= values.dbmisspen2;
+			output['dbarmdbworn']= values.dbarmdb2;
+			output['dbquickpenworn']= values.dbquickpen2;
+			output['dbshieldworn']= values.dbshield2;
+			output['dbshieldrangedworn']= values.dbshieldranged2;
+			output['dbshielddbworn']= values.dbshielddb2;
+			output['dbmagicbonworn']= values.dbmagicbon2;
         } else if (parseInt(values.activearmor) == 3){
-            getAttrs(['atactual3', 'at3', 'dbpweight3', 'dbweightpen3', 'dbmisspen3', 'dbarmdb3', 'dbquickpen3', 'dbshield3', 'dbshieldranged3', 'dbshielddb3', 'dbmagicbon3'], function(values) {
-                setAttrs({
-                    atactualworn: values.atactual3,
-                    atworn: values.at3,
-                    dbpweightworn: values.dbpweight3,
-                    dbweightpenworn: values.dbweightpen3,
-                    dbmisspenworn: values.dbmisspen3,
-                    dbarmdbworn: values.dbarmdb3,
-                    dbquickpenworn: values.dbquickpen3,
-                    dbshieldworn: values.dbshield3,
-                    dbshieldrangedworn: values.dbshieldranged3,
-                    dbshielddbworn: values.dbshielddb3,
-                    dbmagicbonworn: values.dbmagicbon3
-                });
-            });
+			output['atactualworn']= values.atactual3;
+			output['atworn']= values.at3;
+			output['dbpweightworn']= values.dbpweight3;
+			output['dbweightpenworn']= values.dbweightpen3;
+			output['dbmisspenworn']= values.dbmisspen3;
+			output['dbarmdbworn']= values.dbarmdb3;
+			output['dbquickpenworn']= values.dbquickpen3;
+			output['dbshieldworn']= values.dbshield3;
+			output['dbshieldrangedworn']= values.dbshieldranged3;
+			output['dbshielddbworn']= values.dbshielddb3;
+			output['dbmagicbonworn']= values.dbmagicbon3;
         }
+		setAttrs(output);
     });
 });	
+
 // <!---- Copy Offensive Bonus from skill to attack if you can find it ---->
 function WeaponOBCopy(attack){
     let attname = attack+'name';
@@ -14003,8 +13970,9 @@ on('change:cat-arcotherbase', function() {
 });
 
 //	<!---- Update bonus on current stat change.  Do this for each stat ---->	
+// Calculate Base Bonus
 on('change:agility change:statcalc', function() {
-    getAttrs(['agility', 'agbasebonus', 'statcalc'], function(values) {
+    getAttrs(['agility', 'statcalc'], function(values) {
         if (parseInt(values.statcalc) == 1){
             setAttrs({
                 agbasebonus: StatMod(parseInt(values.agility,10))
@@ -14012,8 +13980,9 @@ on('change:agility change:statcalc', function() {
         }
     });
 });
+// Calculate total bonus 
 on('sheet:opened change:agbasebonus change:agracial change:agspecial', function() {
-    getAttrs(['agbasebonus', 'agracial', 'agspecial', 'agbonus'], function(values) {
+    getAttrs(['agbasebonus', 'agracial', 'agspecial'], function(values) {
         setAttrs({
             agbonus: StatCalc(parseInt(values.agbasebonus,10), parseInt(values.agracial,10), parseInt(values.agspecial,10))
         });
@@ -14029,7 +13998,7 @@ on('change:constitution change:statcalc', function() {
     });
 });	
 on('sheet:opened change:cobasebonus change:coracial change:cospecial', function() {
-    getAttrs(['cobasebonus', 'coracial', 'cospecial', 'cobonus'], function(values) {
+    getAttrs(['cobasebonus', 'coracial', 'cospecial'], function(values) {
         setAttrs({
             cobonus: StatCalc(parseInt(values.cobasebonus,10), parseInt(values.coracial,10), parseInt(values.cospecial,10))
         });
@@ -14045,7 +14014,7 @@ on('change:memory change:statcalc', function() {
     });
 });	
 on('sheet:opened change:mebasebonus change:meracial change:mespecial', function() {
-    getAttrs(['mebasebonus', 'meracial', 'mespecial', 'mebonus'], function(values) {
+    getAttrs(['mebasebonus', 'meracial', 'mespecial'], function(values) {
         setAttrs({
             mebonus: StatCalc(parseInt(values.mebasebonus,10), parseInt(values.meracial,10), parseInt(values.mespecial,10))
         });
@@ -14061,7 +14030,7 @@ on('change:reasoning change:statcalc', function() {
     });
 });	
 on('sheet:opened change:rebasebonus change:reracial change:respecial', function() {
-    getAttrs(['rebasebonus', 'reracial', 'respecial', 'rebonus'], function(values) {
+    getAttrs(['rebasebonus', 'reracial', 'respecial'], function(values) {
         setAttrs({
             rebonus: StatCalc(parseInt(values.rebasebonus,10), parseInt(values.reracial,10), parseInt(values.respecial,10))
         });
@@ -14077,7 +14046,7 @@ on('change:selfdiscipline change:statcalc', function() {
     });
 });	
 on('sheet:opened change:sdbasebonus change:sdracial change:sdspecial', function() {
-    getAttrs(['sdbasebonus', 'sdracial', 'sdspecial', 'sdbonus'], function(values) {
+    getAttrs(['sdbasebonus', 'sdracial', 'sdspecial'], function(values) {
         setAttrs({
             sdbonus: StatCalc(parseInt(values.sdbasebonus,10), parseInt(values.sdracial,10), parseInt(values.sdspecial,10))
         });
@@ -14093,7 +14062,7 @@ on('change:empathy change:statcalc', function() {
     });
 });	
 on('sheet:opened change:embasebonus change:emracial change:emspecial', function() {
-    getAttrs(['embasebonus', 'emracial', 'emspecial', 'embonus'], function(values) {
+    getAttrs(['embasebonus', 'emracial', 'emspecial'], function(values) {
         setAttrs({
             embonus: StatCalc(parseInt(values.embasebonus,10), parseInt(values.emracial,10), parseInt(values.emspecial,10))
         });
@@ -14109,7 +14078,7 @@ on('change:intuition change:statcalc', function() {
     });
 });	
 on('sheet:opened change:inbasebonus change:inracial change:inspecial', function() {
-    getAttrs(['inbasebonus', 'inracial', 'inspecial', 'inbonus'], function(values) {
+    getAttrs(['inbasebonus', 'inracial', 'inspecial'], function(values) {
         setAttrs({
             inbonus: StatCalc(parseInt(values.inbasebonus,10), parseInt(values.inracial,10), parseInt(values.inspecial,10))
         });
@@ -14125,7 +14094,7 @@ on('change:presence change:statcalc', function() {
     });
 });	
 on('sheet:opened change:prbasebonus change:prracial change:prspecial', function() {
-    getAttrs(['prbasebonus', 'prracial', 'prspecial', 'prbonus'], function(values) {
+    getAttrs(['prbasebonus', 'prracial', 'prspecial'], function(values) {
         setAttrs({
             prbonus: StatCalc(parseInt(values.prbasebonus,10), parseInt(values.prracial,10), parseInt(values.prspecial,10))
         });
@@ -14141,7 +14110,7 @@ on('change:quickness change:statcalc', function() {
     });
 });
 on('sheet:opened change:qubasebonus change:quracial change:quspecial', function() {
-    getAttrs(['qubasebonus', 'quracial', 'quspecial', 'qubonus'], function(values) {
+    getAttrs(['qubasebonus', 'quracial', 'quspecial'], function(values) {
         setAttrs({
             qubonus: StatCalc(parseInt(values.qubasebonus,10), parseInt(values.quracial,10), parseInt(values.quspecial,10))
         });
@@ -14157,15 +14126,16 @@ on('change:strength change:statcalc', function() {
     });
 });
 on('sheet:opened change:stbasebonus change:stracial change:stspecial', function() {
-    getAttrs(['stbasebonus', 'stracial', 'stspecial', 'stbonus'], function(values) {
+    getAttrs(['stbasebonus', 'stracial', 'stspecial'], function(values) {
         setAttrs({
             stbonus: StatCalc(parseInt(values.stbasebonus,10), parseInt(values.stracial,10), parseInt(values.stspecial,10))
         });
     });
 });
   
+// Calculate developement points from top 5 stats (ag, co, me, re, sd) if any change.  But only if devpointcalc is set.
 on('change:devpointcalc change:agility change:constitution change:memory change:reasoning change:selfdiscipline', function() {
-    getAttrs(['agility', 'constitution', 'memory', 'reasoning', 'selfdiscipline', 'devpoints', 'devpointcalc'], function(values) {
+    getAttrs(['agility', 'constitution', 'memory', 'reasoning', 'selfdiscipline', 'devpointcalc'], function(values) {
         if (parseInt(values.devpointcalc) == 1){
             setAttrs({
                 devpoints: Math.round((parseInt(values.agility,10)+ parseInt(values.constitution,10)+ parseInt(values.memory,10)+ parseInt(values.reasoning,10)+ parseInt(values.selfdiscipline,10) )/5)		//round((@{agility}+@{constitution}+@{memory}+@{reasoning}+@{selfdiscipline})/5)
@@ -14387,7 +14357,7 @@ on('sheet:opened', function() {
 });
 
 //<!---- Calc rank bonus for repeating skills ---->
-on('change:repeating_skills change:rebonus change:mebonus change:embonus change:inbonus change:stbonus change:agbonus change:qubonus change:sdbonus change:prbonus change:cobonus', function() {
+on('change:repeating_skills', function() {
 //			console.log('/*-----------calc rep-skills rank bonus------*/');
     SkillChange('repeating_skills_skillranks');
 });
@@ -14401,7 +14371,7 @@ on('change:repeating_langs', function() {
 
 //  <!---- If repeating_langs_* changes, make a nice summary for the front page for me ---->
 on('change:repeating_langs change:embonus change:mebonus change:rebonus change:cat-communications remove:repeating_langs', function () {
-//console.log('/*----------- create rep-languages summary------*/');
+    //console.log('/*----------- create rep-languages summary------*/');
     getAttrs(['cat-communications-rankbonus', 'rebonus', 'mebonus', 'embonus', 'cat-communications-profbonus', 'cat-communications-specialbonus', 'cat-communications-itembonus'], function (values) {
         let catbonus = parseInt(values['cat-communications-rankbonus'], 10) + parseInt(values.rebonus, 10) + parseInt(values.mebonus, 10) + parseInt(values['cat-communications-profbonus'], 10) + parseInt(values['cat-communications-specialbonus'], 10) + parseInt(values['cat-communications-itembonus'], 10);
         //console.log("catbonus: "+catbonus);
@@ -14424,6 +14394,9 @@ on('change:repeating_langs change:embonus change:mebonus change:rebonus change:c
                 let count = 0,
                     langs1 = '',
                     langs2 = '';
+
+                const output = {}; // optimise: add this to hold the attributes.
+
                 _.each(idarray, function (currentID) {
                     //console.log("languagename: "+x["repeating_langs_"+currentID+"_languagename"]);
                     let langspokenranks = parseInt(x['repeating_langs_' + currentID + '_languagespokenranks'], 10) || 0;
@@ -14440,23 +14413,22 @@ on('change:repeating_langs change:embonus change:mebonus change:rebonus change:c
                     //console.log("langspoken: "+langspoken);
                     let langwritten = parseInt(x['repeating_langs_' + currentID + '_languagewrittenrankbonus'], 10) + parseInt(values.embonus, 10) + catbonus + langwrittenspecial + langwrittenitem;
                     //console.log("langwritten: "+langwritten);
-                    // setAttrs here to spit out the values to the skill tab; these aren't read in directly so should not interfere with building the summary and no point in calculating them again elsewhere.
-                    setAttrs({
-                        ['repeating_langs_' + currentID + '_languagespoken']: langspoken,
-                        ['repeating_langs_' + currentID + '_languagespokencatbonus']: catbonus,
-                        ['repeating_langs_' + currentID + '_languagespokenstat']: parseInt(values.embonus, 10),
-                        ['repeating_langs_' + currentID + '_languagewritten']: langwritten
-                    });
+                    // setAttrs here to spit out the values to the skill tab; these aren't read in directly so should not interfere with building the summary and no point in calculating them again elsewhere.                
+                     //optimise next 4 lines by replacing setAttrs with output[]
+                    output['repeating_langs_' + currentID + '_languagespoken'] = langspoken;
+                    output['repeating_langs_' + currentID + '_languagespokencatbonus'] = catbonus;
+                    output['repeating_langs_' + currentID + '_languagespokenstat'] = parseInt(values.embonus, 10);
+                    output['repeating_langs_' + currentID + '_languagewritten'] = langwritten;
+
                     let langpt1 = x['repeating_langs_' + currentID + '_languagename'] +
-          ' S:' + langspokenranks +
-          '/' + langspoken +
-          ' W:' + langwrittenranks +
-          '/' + langwritten + '  \n';
+                        ' S:' + langspokenranks +
+                        '/' + langspoken +
+                        ' W:' + langwrittenranks +
+                        '/' + langwritten + '  \n';
                     if (x['repeating_langs_' + currentID + '_languagename']) {
                         if ((count % 2) == 1) {
                             langs1 += langpt1;
-                        }
-                        else {
+                        } else {
                             langs2 += langpt1;
                         }
                     }
@@ -14465,10 +14437,10 @@ on('change:repeating_langs change:embonus change:mebonus change:rebonus change:c
                     count++;
                 });
                 //console.log("end langs?");
-                setAttrs({
-                    knownlanguagesr: langs1,
-                    knownlanguagesl: langs2
-                });
+                //optimise next 3 lines: replace setAttrs with output[]
+                output['knownlanguagesr'] = langs1;
+                output['knownlanguagesl'] = langs2;
+                setAttrs(output);
             });
         });
     });
@@ -14477,11 +14449,6 @@ on('change:repeating_langs change:embonus change:mebonus change:rebonus change:c
 // <!---- Calculate total experience ---->
 on('change:repeating_exp remove:repeating_exp', function(){
 //        console.log("Changing exp")
-    
-//    getAttrs(['totalexperience'], function(values){ 
-/* the above line is irrelevant: you never actually read the value from the sheet,
-    you just recreate it then overwrite it, so you odnt need it. gigs done*/
-        
     getSectionIDs('repeating_exp', function(idarray){
         let xptotal = 0;
         let myVars = [];
@@ -14505,9 +14472,7 @@ on('change:repeating_exp remove:repeating_exp', function(){
           
 //    });
 });
-// based on: http://screencast.com/t/U9bVwYAH3
 
-// gigs why are total xp and expcurrent different? do you need a max value?
 //  <!---- Copy experience from totalexperience to expcurrent on PC/Char tab if wanted ---->
 on('change:totalexperience change:xpcopy', function() {
     getAttrs(['totalexperience', 'xpcopy', 'expcurrent', 'expcurrent_max', 'totalexperience_max'], function(values) {
@@ -14520,34 +14485,34 @@ on('change:totalexperience change:xpcopy', function() {
     });
 });
 
-//  <!---- Calculate total coin count and weight for each column ----> //gigs to do
+//  <!---- Calculate total coin count and weight for each column ----> //gigs done
 on('change:coinsperpound change:mithril1 change:platinum1 change:gold1 change:silver1 change:bronze1 change:copper1 change:tin1 change:iron1 change:mithril2 change:platinum2 change:gold2 change:silver2 change:bronze2 change:copper2 change:tin2 change:iron2 change:mithril3 change:platinum3 change:gold3 change:silver3 change:bronze3 change:copper3 change:tin3 change:iron3 change:coinlocationcat1 change:coinlocationcat2 change:coinlocationcat3', function() {
     getAttrs(['coinsperpound', 'mithril1', 'platinum1', 'gold1', 'silver1', 'bronze1', 'copper1', 'tin1', 'iron1', 'mithril2', 'platinum2', 'gold2', 'silver2', 'bronze2', 'copper2', 'tin2', 'iron2', 'mithril3', 'platinum3', 'gold3', 'silver3', 'bronze3', 'copper3', 'tin3', 'iron3', 'coincolumn1', 'coincolumn2', 'coincolumn3', 'coinweight1', 'coinweight2', 'coinweight3', 'coinlocationcat1', 'coinlocationcat2', 'coinlocationcat3'], function(values) {
-        let coinspp = values.coinsperpound * 1,
-            mp1 = values.mithril1 * 1,
-            pp1 = values.platinum1 * 1,
-            gp1 = values.gold1 * 1,
-            sp1 = values.silver1 * 1, 
-            bp1 = values.bronze1 * 1, 
-            cp1 = values.copper1 * 1, 
-            tp1 = values.tin1 * 1, 
-            ip1 = values.iron1 * 1,
-            mp2 = values.mithril2 * 1,
-            pp2 = values.platinum2 * 1,
-            gp2 = values.gold2 * 1,
-            sp2 = values.silver2 * 1, 
-            bp2 = values.bronze2 * 1, 
-            cp2 = values.copper2 * 1, 
-            tp2 = values.tin2 * 1, 
-            ip2 = values.iron2 * 1,
-            mp3 = values.mithril3 * 1,
-            pp3 = values.platinum3 * 1,
-            gp3 = values.gold3 * 1,
-            sp3 = values.silver3 * 1, 
-            bp3 = values.bronze3 * 1, 
-            cp3 = values.copper3 * 1, 
-            tp3 = values.tin3 * 1, 
-            ip3 = values.iron3 * 1,
+        let coinspp = +values.coinsperpound || 0,
+            mp1 = +values.mithril1 || 0,
+            pp1 = +values.platinum1 || 0,
+            gp1 = +values.gold1 || 0,
+            sp1 = +values.silver1 || 0, 
+            bp1 = +values.bronze1 || 0, 
+            cp1 = +values.copper1 || 0, 
+            tp1 = +values.tin1 || 0, 
+            ip1 = +values.iron1 || 0,
+            mp2 = +values.mithril2 || 0,
+            pp2 = +values.platinum2 || 0,
+            gp2 = +values.gold2 || 0,
+            sp2 = +values.silver2 || 0, 
+            bp2 = +values.bronze2 || 0, 
+            cp2 = +values.copper2 || 0, 
+            tp2 = +values.tin2 || 0, 
+            ip2 = +values.iron2 || 0,
+            mp3 = +values.mithril3 || 0,
+            pp3 = +values.platinum3 || 0,
+            gp3 = +values.gold3 || 0,
+            sp3 = +values.silver3 || 0, 
+            bp3 = +values.bronze3 || 0, 
+            cp3 = +values.copper3 || 0, 
+            tp3 = +values.tin3 || 0, 
+            ip3 = +values.iron3 || 0,
             coins1 = mp1 + pp1 + gp1 + sp1 + bp1 + cp1 + tp1 + ip1,
             cweight1 = coins1/coinspp,
             coins2 = mp2 + pp2 + gp2 + sp2 + bp2 + cp2 + tp2 + ip2,
@@ -14555,396 +14520,149 @@ on('change:coinsperpound change:mithril1 change:platinum1 change:gold1 change:si
             coins3 = mp3 + pp3 + gp3 + sp3 + bp3 + cp3 + tp3 + ip3,
             cweight3 = coins3/coinspp;
         //console.log("Mithril1:" + mp1 + ";  Platinum1:" + pp1 + ";  Gold1:" + gp1 + ";  Silver1:" + sp1 + ";  Bronze1:" + bp1 + ";  Copper1:" + cp1 + ";  Tin1:" + tp1 + ";  Iron1:" + ip1 + ";  CoinsCol1:" + coins1 + ";  CoinWeight1:" + cweight1 + ";  /  Mithril2:" + mp2 + ";  Platinum2:" + pp2 + ";  Gold2:" + gp2 + ";  Silver2:" + sp2 + ";  Bronze2:" + bp2 + ";  Copper2:" + cp2 + ";  Tin2:" + tp2 + ";  Iron2:" + ip2 + ";  CoinsCol2:" + coins2 + ";  CoinWeight2:" + cweight2 + ";  /  Mithril3:" + mp3 + ";  Platinum3:" + pp3 + ";  Gold3:" + gp3 + ";  Silver3:" + sp3 + ";  Bronze3:" + bp3 + ";  Copper3:" + cp3 + ";  Tin3:" + tp3 + ";  Iron3:" + ip3 + ";  CoinsCol3:" + coins3 + ";  CoinWeight3:" + cweight3);
-        let c1worn,  //gigs todo
-            c1pack = 0,
-            c1stash1 = 0,
-            c1stash2 = 0,
-            c1armorclothing = 0,
-            c1othernone = 0,
-            c2worn,
-            c2pack = 0,
-            c2stash1 = 0,
-            c2stash2 = 0,
-            c2armorclothing = 0,
-            c2othernone = 0,
-            c3worn,
-            c3pack = 0,
-            c3stash1 = 0,
-            c3stash2 = 0,
-            c3armorclothing = 0,
-            c3othernone = 0  ;
-        if ( (values.coinlocationcat1 * 1) == 1 ){ 
-            c1worn = cweight1,
-            c1pack = 0,
-            c1stash1 = 0,
-            c1stash2 = 0,
-            c1armorclothing = 0,
-            c1othernone = 0; 
-        }
-        else if ( (values.coinlocationcat1* 1) == 2 ){ 
-            c1worn = 0,
-            c1pack = cweight1,
-            c1stash1 = 0,
-            c1stash2 = 0,
-            c1armorclothing = 0,
-            c1othernone = 0; 
-        }
-        else if ( (values.coinlocationcat1 * 1) == 3 ){ 
-            c1worn = 0,
-            c1pack = 0,
-            c1stash1 = cweight1,
-            c1stash2 = 0,
-            c1armorclothing = 0,
-            c1othernone = 0; 
-        }
-        else if ( (values.coinlocationcat1 * 1) == 4 ){ 
-            c1worn = 0,
-            c1pack = 0,
-            c1stash1 = 0,
-            c1stash2 = cweight1,
-            c1armorclothing = 0,
-            c1othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat1 * 1) == 5 ){ 
-            c1worn = 0,
-            c1pack = 0,
-            c1stash1 = 0,
-            c1stash2 = 0,
-            c1armorclothing = cweight1,
-            c1othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat1 * 1) == 0 ){ 
-            c1worn = 0,
-            c1pack = 0,
-            c1stash1 = 0,
-            c1stash2 = 0,
-            c1armorclothing = 0,
-            c1othernone = cweight1 ;
-        }
-        if ( (values.coinlocationcat2 * 1) == 1 ){ 
-            c2worn = cweight2,
-            c2pack = 0,
-            c2stash1 = 0,
-            c2stash2 = 0,
-            c2armorclothing = 0,
-            c2othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat2* 1) == 2 ){ 
-            c2worn = 0,
-            c2pack = cweight2,
-            c2stash1 = 0,
-            c2stash2 = 0,
-            c2armorclothing = 0,
-            c2othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat2 * 1) == 3 ){ 
-            c2worn = 0,
-            c2pack = 0,
-            c2stash1 = cweight2,
-            c2stash2 = 0,
-            c2armorclothing = 0,
-            c2othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat2 * 1) == 4 ){ 
-            c2worn = 0,
-            c2pack = 0,
-            c2stash1 = 0,
-            c2stash2 = cweight2,
-            c2armorclothing = 0,
-            c2othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat2 * 1) == 5 ){ 
-            c2worn = 0,
-            c2pack = 0,
-            c2stash1 = 0,
-            c2stash2 = 0,
-            c2armorclothing = cweight2,
-            c2othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat2 * 1) == 0 ){ 
-            c2worn = 0,
-            c2pack = 0,
-            c2stash1 = 0,
-            c2stash2 = 0,
-            c2armorclothing = 0,
-            c2othernone = cweight2 ;
-        }
-        if ( (values.coinlocationcat3 * 1) == 1 ){ 
-            c3worn = cweight3,
-            c3pack = 0,
-            c3stash1 = 0,
-            c3stash2 = 0,
-            c3armorclothing = 0,
-            c3othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat3* 1) == 2 ){ 
-            c3worn = 0,
-            c3pack = cweight3,
-            c3stash1 = 0,
-            c3stash2 = 0,
-            c3armorclothing = 0,
-            c3othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat3 * 1) == 3 ){ 
-            c3worn = 0,
-            c3pack = 0,
-            c3stash1 = cweight3,
-            c3stash2 = 0,
-            c3armorclothing = 0,
-            c3othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat3 * 1) == 4 ){ 
-            c3worn = 0,
-            c3pack = 0,
-            c3stash1 = 0,
-            c3stash2 = cweight3,
-            c3armorclothing = 0,
-            c3othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat3 * 1) == 5 ){ 
-            c3worn = 0,
-            c3pack = 0,
-            c3stash1 = 0,
-            c3stash2 = 0,
-            c3armorclothing = cweight3,
-            c3othernone = 0 ;
-        }
-        else if ( (values.coinlocationcat3 * 1) == 0 ){ 
-            c3worn = 0,
-            c3pack = 0,
-            c3stash1 = 0,
-            c3stash2 = 0,
-            c3armorclothing = 0,
-            c3othernone = cweight3 ;
-        }
+        
         setAttrs({
             'coincolumn1': Math.round(coins1*100)/100,
             'coinweight1': Math.round(cweight1*100)/100,
             'coincolumn2': Math.round(coins2*100)/100,
             'coinweight2': Math.round(cweight2*100)/100,
             'coincolumn3': Math.round(coins3*100)/100,
-            'coinweight3': Math.round(cweight3*100)/100,
-            'coin1worn': c1worn,
-            'coin1pack': c1pack,
-            'coin1stash1': c1stash1,
-            'coin1stash2': c1stash2,
-            'coin1armorclothing': c1armorclothing,
-            'coin1othernone': c1othernone,
-            'coin2worn': c2worn,
-            'coin2pack': c2pack,
-            'coin2stash1': c2stash1,
-            'coin2stash2': c2stash2,
-            'coin2armorclothing': c2armorclothing,
-            'coin2othernone': c2othernone,
-            'coin3worn': c3worn,
-            'coin3pack': c3pack,
-            'coin3stash1': c3stash1,
-            'coin3stash2': c3stash2,
-            'coin3armorclothing': c3armorclothing,
-            'coin3othernone': c3othernone
+            'coinweight3': Math.round(cweight3*100)/100
         });
     });
 });
-// gigs todo - problem multiple getattrs setattrs within same routine, multiple getsectionids/getattrs for same section
+
 // <!----Calculates the total weight/row and total weight for each weight category. ---->
-on('change:repeating_equipment:equipmentquantity change:repeating_equipment:equipmentweight change:repeating_equipment:equipmentlocationtype remove:repeating_equipment change:coin1othernone change:coin1worn change:coin1pack change:coin1stash1 change:coin1stash2 change:coin1armorclothing change:coin2othernone change:coin2worn change:coin2pack change:coin2stash1 hange:coin2stash2 change:coin2armorclothing change:coin3othernone change:coin3worn change:coin3pack change:coin3stash1 change:coin3stash2 change:coin3armorclothing', function(){
-//console.log("Changing equipment weight")
-    getAttrs(['weightcarried', 'weightbackpack', 'weightstored1', 'weightstored2', 'weightarmor', 'weightothernone', 'repeating_equipment_othernone', 'repeating_equipment_worn', 'repeating_equipment_pack', 'repeating_equipment_stash1', 'repeating_equipment_stash2', 'repeating_equipment_armorclothing', 'repeating_equipment_equipmentquantity', 'repeating_equipment_equipmentweight', 'repeating_equipment_equipmentweighttotal', 'repeating_equipment_equipmentlocationtype', 'coin1worn', 'coin1pack', 'coin1stash1', 'coin1stash2', 'coin1armorclothing', 'coin1othernone', 'coin2worn', 'coin2pack', 'coin2stash1', 'coin2stash2', 'coin2armorclothing', 'coin2othernone', 'coin3worn', 'coin3pack', 'coin3stash1', 'coin3stash2', 'coin3armorclothing', 'coin3othernone'], function(values){
-        let tempweighttotal = 0; //gigs todo
-        //console.log("weighttotal:" + tempweighttotal + " weight:" + values.repeating_equipment_equipmentweight + " quantity:" + values.repeating_equipment_equipmentquantity) + "; coin1worn" + (values.coin1worn * 1) + "; coin2worn" + (values.coin2worn * 1) + "; coin3worn" + (values.coin3worn * 1);
-        tempweighttotal = (values.repeating_equipment_equipmentweight * 1) * (values.repeating_equipment_equipmentquantity * 1);
-        //console.log("weighttotal:" + tempweighttotal + " weight:" + values.repeating_equipment_equipmentweight + " quantity:" + values.repeating_equipment_equipmentquantity);
-        setAttrs({ repeating_equipment_equipmentweighttotal : tempweighttotal });
-        //console.log("equipmentlocationtype:" + (values.repeating_equipment_equipmentlocationtype) );
-        if ( (values.repeating_equipment_equipmentlocationtype * 1) == 1 ){ 
-            setAttrs({ 
-                repeating_equipment_worn : tempweighttotal,
-                repeating_equipment_pack : 0,
-                repeating_equipment_stash1 : 0,
-                repeating_equipment_stash2 : 0,
-                repeating_equipment_armorclothing : 0,
-                repeating_equipment_othernone : 0 });
-        }
-        else if ( (values.repeating_equipment_equipmentlocationtype * 1) == 2 ){ 
-            setAttrs({  
-                repeating_equipment_worn : 0,
-                repeating_equipment_pack : tempweighttotal,
-                repeating_equipment_stash1 : 0,
-                repeating_equipment_stash2 : 0,
-                repeating_equipment_armorclothing : 0,
-                repeating_equipment_othernone : 0 });
-        }
-        else if ( (values.repeating_equipment_equipmentlocationtype * 1) == 3 ){ 
-            setAttrs({ 
-                repeating_equipment_worn : 0,
-                repeating_equipment_pack : 0,
-                repeating_equipment_stash1 : tempweighttotal,
-                repeating_equipment_stash2 : 0,
-                repeating_equipment_armorclothing : 0,
-                repeating_equipment_othernone : 0 });
-        }
-        else if ( (values.repeating_equipment_equipmentlocationtype * 1) == 4 ){ 
-            setAttrs({ 
-                repeating_equipment_worn : 0,
-                repeating_equipment_pack : 0,
-                repeating_equipment_stash1 : 0,
-                repeating_equipment_stash2 : tempweighttotal,
-                repeating_equipment_armorclothing : 0,
-                repeating_equipment_othernone : 0 });
-        }
-        else if ( (values.repeating_equipment_equipmentlocationtype * 1) == 5 ){ 
-            setAttrs({ 
-                repeating_equipment_worn : 0,
-                repeating_equipment_pack : 0,
-                repeating_equipment_stash1 : 0,
-                repeating_equipment_stash2 : 0,
-                repeating_equipment_armorclothing : tempweighttotal,
-                repeating_equipment_othernone : 0 });
-        }
-        else if ( (values.repeating_equipment_equipmentlocationtype * 1) == 0 ){ 
-            setAttrs({ 
-                repeating_equipment_worn : 0,
-                repeating_equipment_pack : 0,
-                repeating_equipment_stash1 : 0,
-                repeating_equipment_stash2 : 0,
-                repeating_equipment_armorclothing : 0,
-                repeating_equipment_othernone : tempweighttotal });
-        }
-        let c1w = (values.coin1worn * 1);
-        let c2w = (values.coin2worn * 1);
-        let c3w = (values.coin3worn * 1);
-        getSectionIDs('repeating_equipment', function(idarray){
-            let myVars = [];
-            for( var i=0; i < idarray.length; i++){
-                myVars.push('repeating_equipment_' + idarray[i] + '_worn');
-            }
-            getAttrs( myVars , function( values ){
-                let weightworntotal = 0;
-                for( i in values){
-                    weightworntotal += (values[i] * 1); 
-                }
-                weightworntotal += c1w + c2w + c3w;
-                //					console.log("weightworntotal:" + weightworntotal);
-                setAttrs({
-                    weightcarried: Math.round(weightworntotal*100)/100
-                });
-            });
-        });
-        let c1p = (values.coin1pack * 1);
-        let c2p = (values.coin2pack * 1);
-        let c3p = (values.coin3pack * 1);
-        getSectionIDs('repeating_equipment', function(idarray){
-            let myVars = [];
-            for( var i=0; i < idarray.length; i++){
-                myVars.push('repeating_equipment_' + idarray[i] + '_pack');
-            }
-            getAttrs( myVars , function( values ){
-                let weightpacktotal = 0;
-                for( i in values){
-                    weightpacktotal += (values[i] * 1); 
-                }
-                weightpacktotal += c1p + c2p + c3p;
-                //					console.log("weightpacktotal:" + weightpacktotal);
-                setAttrs({
-                    weightbackpack: Math.round(weightpacktotal*100)/100
-                });
-            });
-        });
-        let c11s = (values.coin1stash1 * 1);
-        let c21s = (values.coin2stash1 * 1);
-        let c31s = (values.coin3stash1 * 1);
-        getSectionIDs('repeating_equipment', function(idarray){
-            let myVars = [];  
-            for( var i=0; i < idarray.length; i++){
-                myVars.push('repeating_equipment_' + idarray[i] + '_stash1');
-            }
-            getAttrs( myVars , function( values ){
-                let weightstash1total = 0;
-                for( i in values){
-                    weightstash1total += (values[i] * 1); 
-                }
-                weightstash1total += c11s + c21s + c31s;
-                //					console.log("weightstash1total:" + weightstash1total);
-                setAttrs({
-                    weightstored1: Math.round(weightstash1total*100)/100
-                });
-            });
-        });	
-        let c12s = (values.coin1stash2 * 1);
-        let c22s = (values.coin2stash2 * 1);
-        let c32s = (values.coin3stash2 * 1);
-        getSectionIDs('repeating_equipment', function(idarray){
-            let myVars = [];  
-            for( var i=0; i < idarray.length; i++){
-                myVars.push('repeating_equipment_' + idarray[i] + '_stash2');
-            }
-            getAttrs( myVars , function( values ){
-                let weightstash2total = 0;
-                for( i in values){
-                    weightstash2total += (values[i] * 1); 
-                }
-                weightstash2total += c12s + c22s + c32s;
-                //					console.log("weightstash2total:" + weightstash2total);
-                setAttrs({
-                    weightstored2: Math.round(weightstash2total*100)/100
-                });
-            });
-        });	
-        let c1a = (values.coin1armorclothing * 1);
-        let c2a = (values.coin2armorclothing * 1);
-        let c3a = (values.coin3armorclothing * 1);
-        getSectionIDs('repeating_equipment', function(idarray){
-            let myVars = [];
-            for( var i=0; i < idarray.length; i++){
-                myVars.push('repeating_equipment_' + idarray[i] + '_armorclothing');
-            }
-            getAttrs( myVars , function( values ){
-                let weightarmorclothingtotal = 0; //gigs todo
-                for( i in values){
-                    weightarmorclothingtotal += (values[i] * 1); 
-                }
-                weightarmorclothingtotal += c1a + c2a + c3a;
-                //console.log("weightarmorclothingtotal:" + weightarmorclothingtotal);
-                setAttrs({
-                    weightarmor: Math.round(weightarmorclothingtotal*100)/100
-                });
-            });
-        });
-        let c1o = (values.coin1othernone * 1);
-        let c2o = (values.coin2othernone * 1);
-        let c3o = (values.coin3othernone * 1);	
-        getSectionIDs('repeating_equipment', function(idarray){
-            let myVars = [];
-            for( var i=0; i < idarray.length; i++){
-                myVars.push('repeating_equipment_' + idarray[i] + '_othernone');
-            }
-            getAttrs( myVars , function( values ){
-                let weightothernonetotal = 0;
-                for( i in values){
-                    weightothernonetotal += (values[i] * 1); 
-                }
-                weightothernonetotal += c1o + c2o + c3o;
-                //console.log("weightothernonetotal:" + weightothernonetotal);
-                setAttrs({
-                    weightothernone: Math.round(weightothernonetotal*100)/100
-                });
-            });
-        });
+on('change:repeating_equipment:equipmentquantity change:repeating_equipment:equipmentweight change:repeating_equipment:equipmentlocationtype', function() {
+    getAttrs(['repeating_equipment_equipmentweight','repeating_equipment_equipmentquantity', 'repeating_equipment_equipmentlocationtype'], function(values) {
+        //console.log('======================= repeating_equipment_row entered');
+        //console.log(values);
+        
+        const locations = ['repeating_equipment_othernone','repeating_equipment_worn', 'repeating_equipment_pack', 'repeating_equipment_stash1', 'repeating_equipment_stash2', 'repeating_equipment_armorclothing'];
+        const upgrade = {
+            repeating_equipment_worn : 0,
+            repeating_equipment_pack : 0,
+            repeating_equipment_stash1 : 0,
+            repeating_equipment_stash2 : 0,
+            repeating_equipment_armorclothing : 0,
+            repeating_equipment_othernone : 0 };
+        
+        const num = parseInt(values.repeating_equipment_equipmentquantity) || 0;
+        const wt = parseFloat(values.repeating_equipment_equipmentweight) || 0;
+        const total = num * wt;
+        //console.log(`==================== num: ${num}; wt: ${wt}; total: ${total}`);
+        
+        upgrade['repeating_equipment_equipmentweighttotal'] = total;
+        upgrade[locations[parseInt(values.repeating_equipment_equipmentlocationtype) || 0] || 0] = total;
+        //console.log(upgrade);
+        setAttrs(upgrade); 
     });
 });
-  
-// based on: http://screencast.com/t/U9bVwYAH3
+
+on('change:repeating_equipment:equipmentweighttotal change:repeating_equipment:equipmentlocationtype remove:repeating_equipment change:coinweight1 change:coinweight2 change:coinweight3 change:coinlocationcat1 change:coinlocationcat2 change:coinlocationcat3', function(){
+    // always do the getSectionIds BEFORE the getAttrs
+    console.log('===================== entering repeating equip');
+    
+    getSectionIDs('repeating_equipment', function(idarray){
+        // build an array of the names within the repeating section we are interested in, of ecah type - worn, pack, stash1, etc
+        // so that we can do just one getAttrs and one setAttrs.
+        const fieldnames = [];
+        idarray.forEach(id => {
+            fieldnames.push(
+                'repeating_equipment_' + id + '_equipmentweighttotal', 
+                'repeating_equipment_' + id + '_equipmentlocationtype'
+            );
+        });
+        [1,2,3].forEach(i => {
+            fieldnames.push(
+                'coinweight' + i,
+                'coinlocationcat' +i
+            );
+        });
+        // grab ALL the attribute values we might need
+        // ... is the spread operator. it expands an array into all of its individual elements
+        getAttrs(['weightcarried', 'weightbackpack', 'weightstored1', 'weightstored2', 'weightarmor', 'weightothernone',  ...fieldnames], function(values){
+            console.log('========= entering equip getAttrs');
+            // create a relationship between location to be saved, and value to be grabbed
+            const locations = {
+                weightothernone: 'othernone',
+                weightcarried: 'worn',
+                weightbackpack: 'pack',
+                weightstored1: 'stash1',
+                weightstored2: 'stash2',
+                weightarmor: 'armorclothing'
+            };
+                
+            // initialise a holding object for all the values to be saved
+            const upgrade = {
+                weightothernone: 0,
+                weightcarried: 0,
+                weightbackpack: 0,
+                weightstored1: 0,
+                weightstored2: 0,
+                weightarmor: 0
+            };
+            
+            // loop through each row of the repeating section
+            idarray.forEach(id => {
+                // get item weight, and item location
+                const locindex = parseInt(values['repeating_equipment_' + id + '_equipmentlocationtype']) || 0;
+                const loc = Object.keys(locations)[locindex];
+                const wt = parseFloat(values['repeating_equipment_' + id + '_equipmentweighttotal']) ||0;
+                // save it to the appropriate location type
+                upgrade[loc] = upgrade[loc] + wt;
+                
+            });
+            console.log(upgrade);
+            
+            // repeat as above for the coins
+            [1,2,3].forEach(i => {
+                const locindex = parseInt(values['coinlocationcat' +i]) || 0;
+                const loc = Object.keys(locations)[locindex];
+                const wt = parseFloat(values['coinweight' + i]) ||0;
+                upgrade[loc] = upgrade[loc] + wt;
+            });
+
+            // go through the saved values, and apply the desired rounding.
+            Object.keys(upgrade).forEach(loc => {
+                upgrade[loc] = (Math.round(upgrade[loc] *100)/100).toString();
+            });
+
+            setAttrs(upgrade); 
+        });
+        
+    });
+    
+});
+
 
 //  <!---- Copy from equipment weights to totalweightcarried if wanted ---->
 on('change:weightcarried change:weightcarriedcopy change:weightbackpack change:weightbackpackcopy change:weightstored1 change:weightstored2 change:weightstored1copy change:weightstored2copy', function() {
     getAttrs(['weightcarried', 'weightcarriedcopy', 'totalweightcarried', 'weightbackpackcopy', 'weightbackpack', 'weightstored1copy', 'weightstored2copy', 'weightstored1', 'weightstored2', 'totalweightcarried'], function(values) {
         if ( (values.weightcarriedcopy == 1) || (values.weightbackpackcopy == 1) || (values.weightstored1copy == 1) || (values.weightstored2copy == 1) ) {
-            let newtotal = 0; //gigs todo
-            if (values.weightcarriedcopy == 1) {newtotal += values.weightcarried;}
-            if (values.weightbackpackcopy == 1) {newtotal += values.weightbackpack;}
-            if (values.weightstored1copy == 1) {newtotal += values.weightstored1;}
-            if (values.weightstored2copy == 1) {newtotal += values.weightstored2;}
-            setAttrs({ 'totalweightcarried': newtotal });
+            let newtotal = 0; 
+            if (values.weightcarriedcopy == 1) {newtotal += +values.weightcarried || 0;}
+            if (values.weightbackpackcopy == 1) {newtotal += +values.weightbackpack || 0;}
+            if (values.weightstored1copy == 1) {newtotal += +values.weightstored1 || 0;}
+            if (values.weightstored2copy == 1) {newtotal += +values.weightstored2 || 0;}
+            setAttrs({ 'totalweightcarried': Math.round(newtotal *100)/100 });
+        }
+    });
+});
+
+/* <!----- Close other skill categories when one is open to help with lag -----> */
+const categories = ['armor', 'artistic', 'athletic', 'awareness', 'bodydev', 'combatman', 'communications', 'crafts', 'dirspells', 'influence',
+    'lore', 'martialarts', 'outdoor', 'power', 'powerpointdev', 'science', 'selfcontrol', 'special', 'spellsskills', 'subterfuge', 'technical',
+    'urban', 'weapon', 'other'];
+categories.forEach(cat => {
+    const fullcat = `skill${cat}-show`;
+    on(`change:${fullcat}`, function(event) {
+        if(event.newValue == 1) {
+            const upgrade = categories.reduce((obj,category) => {
+                if(category != cat) obj[`skill${category}-show`] = 0;
+                return obj;
+            }, {});
+            setAttrs(upgrade);
         }
     });
 });
@@ -15846,7 +15564,7 @@ on('change:allcalc', function() {
 
 // <!---- If skillcalc gets changed, check and update the skills. ---->
 on('change:skillcalc', function() {
-    getAttrs(['skillcalc', 'allcalc'], function(values) {
+    getAttrs(['skillcalc'], function(values) {
         //		console.log('/* ----------entering SkillCalc Change; skillcalc:' + values.skillcalc + '  allcalc:' + values.allcalc + '------------ */');
         if (parseInt(values.skillcalc, 10) == 1) {
             var skills=['srob-list1', 'srob-list2', 'srob-list3', 'srob-list4', 'srob-list5', 'srob-list6', 'srob-list7', 'srob-list8', 'srob-list9', 'srob-list10', 'sropen-list1', 'sropen-list2', 'sropen-list3', 'sropen-list4', 'sropen-list5', 'sropen-list6', 'sropen-list7', 'sropen-list8', 'sropen-list9', 'sropen-list10', 'srclosed-list1', 'srclosed-list2', 'srclosed-list3', 'srclosed-list4', 'srclosed-list5', 'srclosed-list6', 'srclosed-list7', 'srclosed-list8', 'srclosed-list9', 'srclosed-list10', 'srotherb-list1', 'srotherb-list2', 'srotherb-list3', 'srotherb-list4', 'srotherb-list5', 'srotherb-list6', 'oropen-list1', 'oropen-list2', 'oropen-list3', 'oropen-list4', 'oropen-list5', 'orclosed-list1', 'orclosed-list2', 'orclosed-list3', 'orclosed-list4', 'orclosed-list5', 'orbase-list1', 'orbase-list2', 'orbase-list3', 'orbase-list4', 'orbase-list5', 'arcopen-list1', 'arcopen-list2', 'arcopen-list3', 'arcopen-list4', 'arcopen-list5', 'arcclosed-list1', 'arcclosed-list2', 'arcclosed-list3', 'arcclosed-list4', 'arcclosed-list5', 'arcbase-list1', 'arcbase-list2', 'arcbase-list3', 'arcbase-list4', 'arcbase-list5', 'arcotherbase-list1', 'arcotherbase-list2', 'arcotherbase-list3', 'arcotherbase-list4', 'arcotherbase-list5', 'cat-armor-heavy-', 'plate', 'cat-armor-light-', 'softleather', 'rigidleather', 'cat-armor-med-', 'chain', 'cat-artistic-active-', 'acting', 'dancing', 'mimery', 'mimicry', 'playinstrument1', 'playinstrument2', 'playinstrument3', 'poeticimprov', 'singing', 'taletelling', 'ventriloquism', 'cat-artistic-passive-', 'music', 'painting', 'poetry', 'sculpting', 'cat-athletic-brawn-', 'athleticgamesbrawn1', 'athleticgamesbrawn2', 'athleticgamesbrawn3', 'jumping', 'powerstriking', 'powerthrowing', 'weightlifting', 'cat-athletic-endur-', 'athleticgamesendur1', 'athleticgamesendur2', 'athleticgamesendur3', 'distancerunning', 'rowing', 'scaling', 'sprinting', 'swimming', 'cat-athletic-gym-', 'acrobatics', 'athleticgamesgym1', 'athleticgamesgym2', 'athleticgamesgym3', 'climbing', 'contortions', 'diving', 'flyglide', 'juggling', 'polevaulting', 'rappelling', 'skating', 'skiing', 'stiltwalking', 'surfing', 'tightrope', 'tumbling', 'alertness', 'senseambush', 'cat-aware-search-', 'detecttraps', 'lieperception', 'locatehidden', 'observation', 'poisonperception', 'readtracks', 'surveillance', 'tracking', 'cat-aware-senses-', 'directionsense', 'realityawareness', 'senseawareness1', 'sitawareness1', 'sla', 'timesense', 'awaresenses1', 'awaresenses2', 'awaresenses3', 'bodydev', 'adrenaldeflecting', 'mountedcombat', 'quickdraw', 'reversestroke1', 'subdual', 'swashbuckling', 'tumbleevade', 'twoweaponfighting1', 'combatmaneuvers1', 'combatmaneuvers2', 'combatmaneuvers3', 'cat-communications-', 'lipreading', 'signaling', 'cooking', 'fletching', 'leathercrafts', 'metalcrafts', 'ropemastery', 'scribing', 'sewing', 'skinning', 'stonecrafts', 'trapping', 'woodcrafts', 'craft15', 'craft16', 'cat-directed-spells-', 'firebolt', 'icebolt', 'lightningbolt', 'shockbolt', 'waterbolt', 'boltattack6', 'cat-influence-', 'bribery', 'diplomacy', 'duping', 'interrogation', 'leadership', 'propaganda', 'publicspeaking', 'seduction', 'trading', 'cat-lore-general-', 'culturelore1', 'faunalore', 'floralore', 'heraldry', 'history', 'philosophy', 'regionlore1', 'religion', 'loregeneral1', 'loregeneral2', 'loregeneral3', 'cat-lore-magical-', 'artifactlore', 'circlelore', 'planarlore', 'spelllore', 'symbollore', 'undeadlore', 'wardinglore', 'cat-lore-obscure-', 'demondevillore', 'dragonlore', 'faerielore', 'xenolore1', 'xenolore2', 'xenolore3', 'cat-lore-technical-', 'herblore', 'locklore', 'metallore', 'poisonlore', 'stonelore', 'tradinglore', 'cat-ma-striking-', 'boxing', 'striking1', 'striking2', 'striking3', 'striking4', 'tackling', 'cat-ma-sweeps-', 'blocking', 'sweeps1', 'sweeps2', 'sweeps3', 'sweeps4', 'wrestling', 'cat-outdoor-animal-', 'animalhandling1', 'animalhealing1', 'animalmastery', 'animaltraining1', 'driving1', 'herding1', 'riding1', 'outdooranimal1', 'outdooranimal2', 'outdooranimal3', 'cat-outdoor-environ-', 'caving', 'foraging', 'hunting', 'stargazing', 'survival1', 'survival2', 'survival3', 'weatherwatching', 'cat-power-awareness-', 'attunement', 'divination1', 'divination2', 'divination3', 'powerperception', 'readrunes', 'channeling', 'magicritual', 'spellmastery1', 'spellmastery2', 'spellmastery3', 'transcendarmor', 'ppdev', 'cat-science-basic-', 'basicmath', 'research', 'advancedmath', 'anthropology1', 'alchemy', 'astronomy', 'biochemistry', 'psychology', 'specscience1', 'specscience2', 'cat-self-control-', 'adrenalbalance', 'adrenalconcentration', 'adrenallanding', 'adrenalleaping', 'adrenalquickdraw', 'adrenalspeed', 'adrenalstabilization', 'adrenalstrength', 'cleansingtrance', 'controllycanthropy', 'deathtrance', 'frenzy', 'healingtrance', 'meditation', 'mnemonics', 'sleeptrance', 'stunnedmaneuvering', 'brawling', 'disarmarmedvs1h', 'disarmarmedvs2h', 'disarmarmedvspolearm', 'disarmarmedvs2wcombo', 'disarmunarmedvs1hedged', 'disarmunarmedvs2h', 'disarmunarmedvspolearm', 'disarmunarmedvs1hconcussion', 'jousting', 'adrenaldefense', 'adrenaltoughness', 'cat-subterfuge-attack-', 'ambush', 'silentkill', 'cat-subterfuge-mechanics-', 'camouflage', 'disarmingtraps', 'disguise', 'counterfeiting', 'forgery1', 'hidingitems', 'picklocks', 'settraps', 'trapbuilding', 'usepoison', 'subtermech1', 'subtermech2', 'cat-subterfuge-stealth-', 'hiding', 'pickpockets', 'stalking', 'trickery', 'cat-tech-general-', 'begging', 'firstaid', 'gambling', 'mapping', 'operatingequipment', 'orienteering', 'sailing', 'tacticalgames', 'useprepherbs', 'advertising', 'architecture', 'diagnostics1', 'dowsing', 'engineering1', 'mechanition1', 'militaryorg1', 'mining1', 'secondaid', 'surgery', 'techprof1', 'techprof2', 'techprof3', 'administration', 'appraisal', 'boatpilot1', 'cartography', 'evalarmor', 'evalmetal', 'evalstone', 'evalweapon', 'gimmickry', 'hypnosis', 'midwifery', 'navigation', 'prepareherbs', 'preparepoisons', 'siegeengineering', 'tactics', 'techvoc1', 'techvoc2', 'cat-urban-', 'contacting', 'mingling', 'scrounging', 'streetwise', 'cat-weapon-1hconcussion-', 'weapon1hc1', 'weapon1hc2', 'weapon1hc3', 'cat-weapon-1hedged-', 'weapon1he1', 'weapon1he2', 'weapon1he3', 'cat-weapon-2handed-', 'weapon2hand1', 'weapon2hand2', 'weapon2hand3', 'cat-weapon-missile-', 'weaponmissile1', 'weaponmissile2', 'weaponmissile3', 'cat-weapon-missileartillery-', 'weaponmissileart1', 'weaponmissileart2', 'weaponmissileart3', 'cat-weapon-thrown-', 'weaponthrown1', 'weaponthrown2', 'weaponthrown3', 'cat-weapon-polearms-', 'weaponpolearm1', 'weaponpolearm2', 'weaponpolearm3'];   // list of skills
