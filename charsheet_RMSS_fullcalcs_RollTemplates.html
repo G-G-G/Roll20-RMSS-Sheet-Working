@@ -11913,7 +11913,8 @@ function DropdownStatChange(statname) {
 on('change:activearmor', function() {
     getAttrs(['activearmor', 'atactual1', 'at1', 'dbpweight1', 'dbweightpen1', 'dbmisspen1', 'dbarmdb1', 'dbquickpen1', 'dbshield1', 'dbshieldranged1', 'dbshielddb1', 'dbmagicbon1', 'atactual2', 'at2', 'dbpweight2', 'dbweightpen2', 'dbmisspen2', 'dbarmdb2', 'dbquickpen2', 'dbshield2', 'dbshieldranged2', 'dbshielddb2', 'dbmagicbon2', 'atactual3', 'at3', 'dbpweight3', 'dbweightpen3', 'dbmisspen3', 'dbarmdb3', 'dbquickpen3', 'dbshield3', 'dbshieldranged3', 'dbshielddb3', 'dbmagicbon3'], function(values) {
 		const output = {};
-        if (parseInt(values.activearmor) == 1){
+		var activearmor = parseInt(values.activearmor);
+        if (activearmor == 1){
 			output['atactualworn']= values.atactual1;
 			output['atworn']= values.at1;
 			output['dbpweightworn']= values.dbpweight1;
@@ -11925,7 +11926,7 @@ on('change:activearmor', function() {
 			output['dbshieldrangedworn']= values.dbshieldranged1;
 			output['dbshielddbworn']= values.dbshielddb1;
 			output['dbmagicbonworn']= values.dbmagicbon1;
-        } else if (parseInt(values.activearmor) == 2){
+        } else if (activearmor == 2){
 			output['atactualworn']= values.atactual2;
 			output['atworn']= values.at2;
 			output['dbpweightworn']= values.dbpweight2;
@@ -11937,7 +11938,7 @@ on('change:activearmor', function() {
 			output['dbshieldrangedworn']= values.dbshieldranged2;
 			output['dbshielddbworn']= values.dbshielddb2;
 			output['dbmagicbonworn']= values.dbmagicbon2;
-        } else if (parseInt(values.activearmor) == 3){
+        } else if (activearmor == 3){
 			output['atactualworn']= values.atactual3;
 			output['atworn']= values.at3;
 			output['dbpweightworn']= values.dbpweight3;
