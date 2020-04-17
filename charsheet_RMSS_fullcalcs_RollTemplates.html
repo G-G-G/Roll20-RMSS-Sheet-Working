@@ -11909,52 +11909,6 @@ function DropdownStatChange(statname) {
     });
 }
 
-// <!---- Copy Armor from Primary/Secondary/Tertiary to Worn ---->
-on('change:activearmor', function() {
-    getAttrs(['activearmor', 'atactual1', 'at1', 'dbpweight1', 'dbweightpen1', 'dbmisspen1', 'dbarmdb1', 'dbquickpen1', 'dbshield1', 'dbshieldranged1', 'dbshielddb1', 'dbmagicbon1', 'atactual2', 'at2', 'dbpweight2', 'dbweightpen2', 'dbmisspen2', 'dbarmdb2', 'dbquickpen2', 'dbshield2', 'dbshieldranged2', 'dbshielddb2', 'dbmagicbon2', 'atactual3', 'at3', 'dbpweight3', 'dbweightpen3', 'dbmisspen3', 'dbarmdb3', 'dbquickpen3', 'dbshield3', 'dbshieldranged3', 'dbshielddb3', 'dbmagicbon3'], function(values) {
-		const output = {};
-		var activearmor = parseInt(values.activearmor);
-        if (activearmor == 1){
-			output['atactualworn']= values.atactual1;
-			output['atworn']= values.at1;
-			output['dbpweightworn']= values.dbpweight1;
-			output['dbweightpenworn']= values.dbweightpen1;
-			output['dbmisspenworn']= values.dbmisspen1;
-			output['dbarmdbworn']= values.dbarmdb1;
-			output['dbquickpenworn']= values.dbquickpen1;
-			output['dbshieldworn']= values.dbshield1;
-			output['dbshieldrangedworn']= values.dbshieldranged1;
-			output['dbshielddbworn']= values.dbshielddb1;
-			output['dbmagicbonworn']= values.dbmagicbon1;
-        } else if (activearmor == 2){
-			output['atactualworn']= values.atactual2;
-			output['atworn']= values.at2;
-			output['dbpweightworn']= values.dbpweight2;
-			output['dbweightpenworn']= values.dbweightpen2;
-			output['dbmisspenworn']= values.dbmisspen2;
-			output['dbarmdbworn']= values.dbarmdb2;
-			output['dbquickpenworn']= values.dbquickpen2;
-			output['dbshieldworn']= values.dbshield2;
-			output['dbshieldrangedworn']= values.dbshieldranged2;
-			output['dbshielddbworn']= values.dbshielddb2;
-			output['dbmagicbonworn']= values.dbmagicbon2;
-        } else if (activearmor == 3){
-			output['atactualworn']= values.atactual3;
-			output['atworn']= values.at3;
-			output['dbpweightworn']= values.dbpweight3;
-			output['dbweightpenworn']= values.dbweightpen3;
-			output['dbmisspenworn']= values.dbmisspen3;
-			output['dbarmdbworn']= values.dbarmdb3;
-			output['dbquickpenworn']= values.dbquickpen3;
-			output['dbshieldworn']= values.dbshield3;
-			output['dbshieldrangedworn']= values.dbshieldranged3;
-			output['dbshielddbworn']= values.dbshielddb3;
-			output['dbmagicbonworn']= values.dbmagicbon3;
-        }
-		setAttrs(output);
-    });
-});	
-
 // <!---- Copy Offensive Bonus from skill to attack if you can find it ---->
 function WeaponOBCopy(attack){
     let attname = attack+'name';
@@ -12438,6 +12392,52 @@ on ('change:weapon1hc1 change:weapon1hc2 change:weapon1hc3 change:weapon1he1 cha
         }
     });
 });
+
+// <!---- Copy Armor from Primary/Secondary/Tertiary to Worn ---->
+on('change:activearmor', function() {
+    getAttrs(['activearmor', 'atactual1', 'at1', 'dbpweight1', 'dbweightpen1', 'dbmisspen1', 'dbarmdb1', 'dbquickpen1', 'dbshield1', 'dbshieldranged1', 'dbshielddb1', 'dbmagicbon1', 'atactual2', 'at2', 'dbpweight2', 'dbweightpen2', 'dbmisspen2', 'dbarmdb2', 'dbquickpen2', 'dbshield2', 'dbshieldranged2', 'dbshielddb2', 'dbmagicbon2', 'atactual3', 'at3', 'dbpweight3', 'dbweightpen3', 'dbmisspen3', 'dbarmdb3', 'dbquickpen3', 'dbshield3', 'dbshieldranged3', 'dbshielddb3', 'dbmagicbon3'], function(values) {
+		const output = {};
+		var activearmor = parseInt(values.activearmor);
+        if (activearmor == 1){
+			output['atactualworn']= values.atactual1;
+			output['atworn']= values.at1;
+			output['dbpweightworn']= values.dbpweight1;
+			output['dbweightpenworn']= values.dbweightpen1;
+			output['dbmisspenworn']= values.dbmisspen1;
+			output['dbarmdbworn']= values.dbarmdb1;
+			output['dbquickpenworn']= values.dbquickpen1;
+			output['dbshieldworn']= values.dbshield1;
+			output['dbshieldrangedworn']= values.dbshieldranged1;
+			output['dbshielddbworn']= values.dbshielddb1;
+			output['dbmagicbonworn']= values.dbmagicbon1;
+        } else if (activearmor == 2){
+			output['atactualworn']= values.atactual2;
+			output['atworn']= values.at2;
+			output['dbpweightworn']= values.dbpweight2;
+			output['dbweightpenworn']= values.dbweightpen2;
+			output['dbmisspenworn']= values.dbmisspen2;
+			output['dbarmdbworn']= values.dbarmdb2;
+			output['dbquickpenworn']= values.dbquickpen2;
+			output['dbshieldworn']= values.dbshield2;
+			output['dbshieldrangedworn']= values.dbshieldranged2;
+			output['dbshielddbworn']= values.dbshielddb2;
+			output['dbmagicbonworn']= values.dbmagicbon2;
+        } else if (activearmor == 3){
+			output['atactualworn']= values.atactual3;
+			output['atworn']= values.at3;
+			output['dbpweightworn']= values.dbpweight3;
+			output['dbweightpenworn']= values.dbweightpen3;
+			output['dbmisspenworn']= values.dbmisspen3;
+			output['dbarmdbworn']= values.dbarmdb3;
+			output['dbquickpenworn']= values.dbquickpen3;
+			output['dbshieldworn']= values.dbshield3;
+			output['dbshieldrangedworn']= values.dbshieldranged3;
+			output['dbshielddbworn']= values.dbshielddb3;
+			output['dbmagicbonworn']= values.dbmagicbon3;
+        }
+		setAttrs(output);
+    });
+});	
 
 // <!-- Recalc skills -->
 on('change:skillrecalc', function(){
