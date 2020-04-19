@@ -1,0 +1,361 @@
+Agility stat change
+	Ag base bonus change(Line 13977) 
+		Ag total bonus change (Line 13987)
+			development point change (ag, co, me, re, sd) (Line 14140)
+			change the skill category stat bonuses and skill stat bonus (Line 12467)
+				for cat-athletic-endur call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-athletic-endur call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy athletic-endur category bonus to it's various skills (Line 13225)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-outdoor-animal call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-outdoor-animal call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy outdoor-animal category bonus to it's various skills (Line 13482)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-subterfuge-mechanics call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-subterfuge-mechanics call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy subterfuge-mechanics category bonus to it's various skills (Line 13633)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-weapon-missileartillery call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-weapon-missileartillery call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy weapon-missileartillery category bonus to it's various skills (Line 13785)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+									missileartillery1 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									missileartillery2 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									missileartillery3 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 12469 and the setAttrs at line 12524 -Or- the one at line 12551 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). I can type them all out but it will take a while..
+					
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+
+SkillChange (Line 11718); onchange is setup on Line 14381
+CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+
+Constitution stat change
+	Co base bonus change (Line 13994)
+		Co total bonus change (Line 14003)
+			development point change (ag, co, me, re, sd) (Line 14140)
+			change the skill category stat bonuses and skill stat bonus (Line 12579)
+				for cat-athletic-endur call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-athletic-endur call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy athletic-endur category bonus to it's various skills (Line 13225)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-bodydev call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-bodydev call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-athletic-brawn call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-athletic-brawn call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy athletic-brawn category bonus to it's various skills (Line 13210)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for athleticgamesendur1 call SkillChange (Line 11718); onchange is setup on Line 14381
+					for athleticgamesendur1 call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				.... continue^ for the rest of the skills listed in the setAttrs at line 12592.
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+
+Memory stat change
+	Me base bonus change (Line 14010)
+		Me total bonus change (Line 14019)
+			development point change (ag, co, me, re, sd) (Line 14140)
+			change the skill category stat bonuses and skill stat bonus (Line 12741)
+				for cat-crafts call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-crafts call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy crafts category bonus to it's various skills (Line 13340)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-tech-vocational call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-tech-vocational call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy tech-vocational category bonus to it's various skills (Line 13703)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-combat-maneuvers call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-combat-maneuvers call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy combat-maneuvers category bonus to it's various skills (Line 13309)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+									mounted combat skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									reversestroke1 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									subdual skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									twoweaponfighting1 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+				for cat-lore-general call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-lore-general call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy lore-general category bonus to it's various skills (Line 13392)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 12743 and the setAttrs at line 12781 -Or- the one at line 12795 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). 
+				recalculate and update the repeating_languages and summary (Line 14402)
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+
+Reasoning stat change
+	Re base bonus change (Line 14026)
+		Re total bonus change (Line 14035)
+			development point change (ag, co, me, re, sd) (Line 14140)
+			change the skill category stat bonuses and skill stat bonus (Line 12880)
+				for cat-aware-search call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-aware-search call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy aware-search category bonus to it's various skills (Line 13276)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-communications call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-communications call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy communications category bonus to it's various skills (Line 13328)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-lore-general call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-lore-general call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy lore-general category bonus to it's various skills (Line 13392)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-lore-magical call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-lore-magical call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy lore-magical category bonus to it's various skills (Line 13411)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 12882 and the setAttrs at line 12917 -Or- the one at line 12939 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). 
+				recalculate and update the repeating_languages and summary (Line 14402)
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+
+Self Discipline stat change
+	SD base bonus change (Line 14042)
+		SD total bonus change (Line 14051)
+			development point change (ag, co, me, re, sd) (Line 14140)
+			change the skill category stat bonuses and skill stat bonus (Line 12947)
+				for cat-directed-spells call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-directed-spells call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy directed-spells category bonus to it's various skills (Line 13361)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+									firebolt skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									icebolt skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									lightningbolt skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									shockbolt skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									waterbolt skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									boltattack6 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+				for cat-subterfuge-attack call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-subterfuge-attack call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy subterfuge-attack category bonus to it's various skills (Line 13623)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-subterfuge-stealth call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-subterfuge-stealth call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy subterfuge-stealth category bonus to it's various skills (Line 13653)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for bodydev call SkillChange (Line 11718); onchange is setup on Line 14381
+					for bodydev call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 12949 and the setAttrs at line 12981 -Or- the one at line 13026 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). 
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+
+Empathy stat change	
+	Em base bonus change (Line 14058)
+		Em total bonus change (Line 14067)
+			Update power point development rank bonus (Line 14360)
+				Update power points (Line 13119)
+			change the skill category stat bonuses and skill stat bonus (Line 12607)
+				for cat-outdoor-animal call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-outdoor-animal call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy outdoor-animal category bonus to it's various skills (Line 13482)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-artistic-passive call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-artistic-passive call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy artistic-passive category bonus to it's various skills (Line 13198)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-power-awareness call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-power-awareness call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy power-awareness category bonus to it's various skills (Line 13516)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-artistic-active call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-artistic-active call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy artistic-active category bonus to it's various skills (Line 13179)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 12610 and the setAttrs at line 12622 -Or- the one at line 12630 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). 
+				update realm for spells and powerpointdev (Line 14331)
+					uses SetRealm (Line 11198)
+					update realmstat on powerpointdev and spelllists (Line 13130)
+						for ppdev and each spell category call SkillChange (Line 11718); onchange is setup on Line 14381
+							for ppdev and each spell category call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+								copy the <spells> category bonus to the spell list skills (Line 13818) thru Line (13973)
+									for each spell list skill call SkillChange (Line 11718); onchange is setup on Line 14381
+										for each spell list skill call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				recalculate and update the repeating_languages and summary (Line 14402)
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+
+Intuition stat change
+	In base bonus change (Line 14074)
+		In total bonus change (Line 14083)
+			Update power point development rank bonus (Line 14360)
+				Update power points (Line 13119)
+			change the skill category stat bonuses and skill stat bonus (Line 12657)
+				for cat-subterfuge-mechanics call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-subterfuge-mechanics call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy subterfuge-stealth category bonus to it's various skills (Line 13653)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-weapon-missileartillery call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-weapon-missileartillery call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy weapon-missileartillery category bonus to it's various skills (Line 13785)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+									missileartillery1 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									missileartillery2 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									missileartillery3 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+				for cat-artistic-passive call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-artistic-passive call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy artistic-passive category bonus to it's various skills (Line 13198)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-power-awareness call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-power-awareness call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy power-awareness category bonus to it's various skills (Line 13516)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 12659 and the setAttrs at line 12690 -Or- the one at line 12709 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use).
+				update realm for spells and powerpointdev (Line 14331)
+					uses SetRealm (Line 11198)
+					update realmstat on powerpointdev and spelllist categories (Line 13130)
+						for ppdev and each spell category call SkillChange (Line 11718); onchange is setup on Line 14381
+							for ppdev and each spell category call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+								copy the <spells> category bonus to the spell list skills (Line 13818) thru Line (13973)
+									for each spell list skill call SkillChange (Line 11718); onchange is setup on Line 14381
+										for each spell list skill call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+
+Presence stat change
+	Pr base bonus change (Line 14090)
+		Pr total bonus change (Line 14099)
+			Update power point development rank bonus (Line 14360)
+				Update power points (Line 13119)
+			change the skill category stat bonuses and skill stat bonus (Line 12809)
+				for cat-artistic-active call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-artistic-active call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy artistic-active category bonus to it's various skills (Line 13179)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-influence call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-influence call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy influence category bonus to it's various skills (Line 13375)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-urban call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-urban call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy urban category bonus to it's various skills (Line 13729)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-self-control call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-self-control call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy self-control category bonus to it's various skills (Line 13570)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				.... continue^ for the rest of the skills listed in the setAttrs at line 12811 and the setAttrs at line 12824 -Or- the one at line 12837 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). 
+				update realm for spells and powerpointdev (Line 14331)
+					uses SetRealm (Line 11198)
+					update realmstat on powerpointdev and spelllists (Line 13130)
+						for ppdev and each spell category call SkillChange (Line 11718); onchange is setup on Line 14381
+							for ppdev and each spell category call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+								copy the <spells> category bonus to the spell list skills (Line 13818) thru Line (13973)
+									for each spell list skill call SkillChange (Line 11718); onchange is setup on Line 14381
+										for each spell list skill call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+
+Quickness stat change
+	Qu base bonus change (Line 14106)
+		Qu total bonus change (Line 14115)
+			change the skill category stat bonuses and skill stat bonus (Line 12859)
+				for cat-athletic-gym call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-athletic-gym call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy athletic-gym category bonus to it's various skills (Line 13241)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-combat-maneuvers call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-combat-maneuvers call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy combat-maneuvers category bonus to it's various skills (Line 13309)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for sprinting call SkillChange (Line 11718); onchange is setup on Line 14381
+					If sprinting changed (depending on sheet setup), then for sprinting call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for tackling call SkillChange (Line 11718); onchange is setup on Line 14381
+					If tackling changed (depending on sheet setup), then for tackling call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for adrenalspeed call SkillChange (Line 11718); onchange is setup on Line 14381
+					If adrenalspeed changed (depending on sheet setup), then for adrenalspeed call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+
+Strength stat change
+	St base bonus change (Line 14122)
+		St total bonus (Line 14131)
+			change the skill category stat bonuses and skill stat bonus (Line 13055)
+				for cat-armor-heavy call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-armor-heavy call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy armor-heavy category bonus to it's various skills (Line 13151)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-armor-med call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-armor-med call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy armor-med category bonus to it's various skills (Line 13170)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+				for cat-ma-striking call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-ma-striking call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy ma-striking category bonus to it's various skills (Line 13454)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+									striking1 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									striking2 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									striking3 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									striking4 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+				for cat-special-attacks call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-special-attacks call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy special-attacks category bonus to it's various skills (Line 13595)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+									brawling skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+				for cat-weapon-1hconcussion call SkillChange (Line 11718); onchange is setup on Line 14381
+					for cat-weapon-1hconcussion call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+						copy weapon-1hconcussion category bonus to it's various skills (Line 13741)
+							for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+								for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+									weapon1hc1 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									weapon1hc2 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+									weapon1hc3 skill changed. try to update the OB on the attacks table (Line 12383)
+										this calls WeaponOBCopy (Line 11915)
+				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 13057 and the setAttrs at line 13089 -Or- the one at line 13104 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). 
+			change stat bonus for skills with dropdowns (Line 12457)
+			     calls DropdownStatChange (Line 11879)
+  

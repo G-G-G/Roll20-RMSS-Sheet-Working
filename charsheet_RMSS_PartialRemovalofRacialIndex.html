@@ -11104,95 +11104,7 @@ function GenSkillMod(rank, prog0, prog10, prog20, prog30, prog31) {
     //	  console.log('/* ----------leaving GenSkillMod mod:'+mod+'------------ */');
     return mod;  
 }
-  
-// <!-- Body Dev Progression Setup -->
-// takes racial index (my value) and progression index and returns current rank modifier.  Passes through the current value if the race is set to "custom" rather than one of the premades
-function BodyDevProgMod(racialindex, pindex, currentval) {
-    let mod = 0;
-    //	  console.log('/* ----------inside BodyDevProgMod rank:'+racialindex+'------------ */');
-    if (racialindex == 10) {				//------Common Man------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 6;}
-        else if (pindex == 20) {mod = 4;}
-        else if (pindex == 30) {mod = 2;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 11) {		//------Mixed Man------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 6;}
-        else if (pindex == 20) {mod = 5;}
-        else if (pindex == 30) {mod = 2;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 12) {		//------High Man------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 7;}
-        else if (pindex == 20) {mod = 5;}
-        else if (pindex == 30) {mod = 3;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 20) {		//------Half-elf------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 7;}
-        else if (pindex == 20) {mod = 5;}
-        else if (pindex == 30) {mod = 3;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 21) {		//------Wood Elf------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 6;}
-        else if (pindex == 20) {mod = 3;}
-        else if (pindex == 30) {mod = 1;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 22) {		//------Grey Elf------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 6;}
-        else if (pindex == 20) {mod = 3;}
-        else if (pindex == 30) {mod = 2;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 23) {		//------High Elf------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 7;}
-        else if (pindex == 20) {mod = 3;}
-        else if (pindex == 30) {mod = 2;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 30) {		//------Dwarf------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 7;}
-        else if (pindex == 20) {mod = 4;}
-        else if (pindex == 30) {mod = 2;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 40) {		//------Halfling------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 6;}
-        else if (pindex == 20) {mod = 2;}
-        else if (pindex == 30) {mod = 2;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 50) {		//------Half-orc------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 7;}
-        else if (pindex == 20) {mod = 4;}
-        else if (pindex == 30) {mod = 2;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 51) {		//------Common Orc------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 6;}
-        else if (pindex == 20) {mod = 3;}
-        else if (pindex == 30) {mod = 2;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 52) {		//------Greater Orc------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 7;}
-        else if (pindex == 20) {mod = 3;}
-        else if (pindex == 30) {mod = 2;}
-        else if (pindex == 31) {mod = 1;}
-    } else if (racialindex == 52) {		//------None; reset to zero------
-        if (pindex == 0) {mod = 0;}
-        else if (pindex == 10) {mod = 0;}
-        else if (pindex == 20) {mod = 0;}
-        else if (pindex == 30) {mod = 0;}
-        else if (pindex == 31) {mod = 0;}
-    } else if (racialindex == 1) {mod = currentval;}		//------Custom------
-    //	  console.log('/* ----------leaving BodyDevProgMod mod:'+mod+'------------ */');
-    return mod;  
-}
-  
+    
 // <!-- Set Realm -->
 // takes realm selection, in mod, em mod, and pr mod and returns proper realm bonus depending upon selected realm and current stats.
 function SetRealm(rselect, intmod, empmod, premod) {
@@ -11339,290 +11251,7 @@ function PPDevProgMod(rselect, racialindex, pindex, currentval) {
     //	  console.log('/* ----------leaving PPDevProgMod mod:'+mod+'------------ */');
     return mod;  
 }
-  
-// <!-- Race Fixed Info (Stat, RR bonuses + Soul Departure/Recovery Multiplier) Setup -->
-// takes racial index and a value index for which stat/resistance/etc and returns the value for that race.  Passes through the current value if race is set to a non-supported/custom race.
-function RaceFixedInfoSetup(racialindex, index, currentval) {
-    let mod = 0;
-    //	  console.log('/* ----------inside RaceFixedInfoSetup rank:'+racialindex+'------------ */');
-    if (racialindex == 10) {				//-------Common Man-------
-        if (index == 1) {mod = 0;} 			//Ag 
-        else if (index == 2) {mod = 0;}		//Co
-        else if (index == 3) {mod = 0;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = 2;}		//SD
-        else if (index == 6) {mod = 0;}		//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = 0;}		//Pr
-        else if (index == 9) {mod = 0;}		//Qu
-        else if (index == 10) {mod = 2;}	//St
-        else if (index == 11) {mod = 0;}	//Ess
-        else if (index == 12) {mod = 0;}	//Chan
-        else if (index == 13) {mod = 0;}	//Ment
-        else if (index == 14) {mod = 0;}	//Poison
-        else if (index == 15) {mod = 0;}	//Disease
-        else if (index == 20) {mod = 0;}    //Will
-        else if (index == 16) {mod = 12;}	//Soul Departure
-        else if (index == 17) {mod = 1;}	//Recovery Multiplier
-        else if (index == 18) {mod = 2;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 11) {		//-------Mixed Man-------
-        if (index == 1) {mod = 0;} 			//Ag
-        else if (index == 2) {mod = 2;}		//Co
-        else if (index == 3) {mod = 0;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = 2;}		//SD
-        else if (index == 6) {mod = 2;}		//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = 2;}		//Pr
-        else if (index == 9) {mod = 0;}		//Qu
-        else if (index == 10) {mod = 2;}	//St 
-        else if (index == 11) {mod = 0;}	//Ess
-        else if (index == 12) {mod = 0;}	//Chan
-        else if (index == 13) {mod = 0;}	//Ment
-        else if (index == 14) {mod = 0;}	//Poison
-        else if (index == 15) {mod = 0;}	//Disease
-        else if (index == 20) {mod = 0;}    //Will
-        else if (index == 16) {mod = 11;}	//Soul Departure
-        else if (index == 17) {mod = 0.9;}	//Recovery Multiplier
-        else if (index == 18) {mod = 2;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 12) {		//-------High Man-------
-        if (index == 1) {mod = -2;} 			//Ag 
-        else if (index == 2) {mod = 4;}		//Co
-        else if (index == 3) {mod = 0;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = 0;}		//SD
-        else if (index == 6) {mod = 0;}		//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = 4;}		//Pr
-        else if (index == 9) {mod = -2;}	//Qu
-        else if (index == 10) {mod = 4;}	//St
-        else if (index == 11) {mod = -5;}	//Ess
-        else if (index == 12) {mod = -5;}	//Chan
-        else if (index == 13) {mod = -5;}	//Ment
-        else if (index == 14) {mod = 0;}	//Poison
-        else if (index == 15) {mod = 0;}	//Disease
-        else if (index == 20) {mod = 0;}    //Will
-        else if (index == 16) {mod = 10;}	//Soul Departure
-        else if (index == 17) {mod = 0.75;}	//Recovery Multiplier
-        else if (index == 18) {mod = 2;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 20) {		//-------Half-elf-------
-        if (index == 1) {mod = 2;} 			//Ag 
-        else if (index == 2) {mod = 2;}		//Co
-        else if (index == 3) {mod = 0;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = -3;}	//SD
-        else if (index == 6) {mod = 0;}		//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = 4;}		//Pr
-        else if (index == 9) {mod = 4;}		//Qu
-        else if (index == 10) {mod = 2;}	//St
-        else if (index == 11) {mod = -5;}	//Ess
-        else if (index == 12) {mod = -5;}	//Chan
-        else if (index == 13) {mod = -5;}	//Ment
-        else if (index == 14) {mod = 0;}	//Poison
-        else if (index == 15) {mod = 50;}	//Disease
-        else if (index == 20) {mod = -15;}  //Will
-        else if (index == 16) {mod = 6;}	//Soul Departure
-        else if (index == 17) {mod = 1.5;}	//Recovery Multiplier
-        else if (index == 18) {mod = 3;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 21) {		//-------Wood Elf-------
-        if (index == 1) {mod = 4;} 			//Ag 
-        else if (index == 2) {mod = 0;}		//Co
-        else if (index == 3) {mod = 2;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = -5;}	//SD
-        else if (index == 6) {mod = 2;}		//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = 2;}		//Pr
-        else if (index == 9) {mod = 2;}		//Qu
-        else if (index == 10) {mod = 0;}	//St
-        else if (index == 11) {mod = -5;}	//Ess
-        else if (index == 12) {mod = -5;}	//Chan
-        else if (index == 13) {mod = -5;}	//Ment
-        else if (index == 14) {mod = 10;}	//Poison
-        else if (index == 15) {mod = 100;}	//Disease
-        else if (index == 20) {mod = -15;}  //Will
-        else if (index == 16) {mod = 3;}	//Soul Departure
-        else if (index == 17) {mod = 1.5;}	//Recovery Multiplier
-        else if (index == 18) {mod = 3;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 22) {		//-------Grey Elf-------
-        if (index == 1) {mod = 2;} 			//Ag 
-        else if (index == 2) {mod = 0;}		//Co
-        else if (index == 3) {mod = 2;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = -5;}	//SD
-        else if (index == 6) {mod = 2;}		//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = 4;}		//Pr
-        else if (index == 9) {mod = 4;}		//Qu
-        else if (index == 10) {mod = 0;}	//St
-        else if (index == 11) {mod = -5;}	//Ess
-        else if (index == 12) {mod = -5;}	//Chan
-        else if (index == 13) {mod = -5;}	//Ment
-        else if (index == 14) {mod = 10;}	//Poison
-        else if (index == 15) {mod = 100;}	//Disease
-        else if (index == 20) {mod = -15;}  //Will
-        else if (index == 16) {mod = 2;}	//Soul Departure
-        else if (index == 17) {mod = 2;}	//Recovery Multiplier
-        else if (index == 18) {mod = 4;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 23) {		//-------High Elf-------
-        if (index == 1) {mod = 2;} 			//Ag 
-        else if (index == 2) {mod = 0;}		//Co
-        else if (index == 3) {mod = 2;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = -5;}	//SD
-        else if (index == 6) {mod = 2;}		//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = 6;}		//Pr
-        else if (index == 9) {mod = 6;}		//Qu
-        else if (index == 10) {mod = 0;}	//St
-        else if (index == 11) {mod = -5;}	//Ess
-        else if (index == 12) {mod = -5;}	//Chan
-        else if (index == 13) {mod = -5;}	//Ment
-        else if (index == 14) {mod = 10;}	//Poison
-        else if (index == 15) {mod = 100;}	//Disease
-        else if (index == 20) {mod = -15;}  //Will
-        else if (index == 16) {mod = 1;}	//Soul Departure
-        else if (index == 17) {mod = 3;}	//Recovery Multiplier
-        else if (index == 18) {mod = 5;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 30) {		//-------Dwarf-------
-        if (index == 1) {mod = -2;} 			//Ag 
-        else if (index == 2) {mod = 6;}		//Co
-        else if (index == 3) {mod = 0;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = 2;}		//SD
-        else if (index == 6) {mod = -4;}	//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = -4;}	//Pr
-        else if (index == 9) {mod = -2;}	//Qu
-        else if (index == 10) {mod = 2;}	//St
-        else if (index == 11) {mod = 40;}	//Ess
-        else if (index == 12) {mod = 0;}	//Chan
-        else if (index == 13) {mod = 40;}	//Ment
-        else if (index == 14) {mod = 20;}	//Poison
-        else if (index == 15) {mod = 15;}	//Disease
-        else if (index == 20) {mod = 80;}   //Will
-        else if (index == 16) {mod = 21;}	//Soul Departure
-        else if (index == 17) {mod = 0.5;}	//Recovery Multiplier
-        else if (index == 18) {mod = 1;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 40) {		//-------Halfling-------
-        if (index == 1) {mod = 6;} 			//Ag 
-        else if (index == 2) {mod = 6;}		//Co
-        else if (index == 3) {mod = 0;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = -4;}	//SD
-        else if (index == 6) {mod = -2;}	//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = -6;}	//Pr
-        else if (index == 9) {mod = 4;}		//Qu
-        else if (index == 10) {mod = -8;}	//St
-        else if (index == 11) {mod = 40;}	//Ess
-        else if (index == 12) {mod = 0;}	//Chan
-        else if (index == 13) {mod = 40;}	//Ment
-        else if (index == 14) {mod = 30;}	//Poison
-        else if (index == 15) {mod = 15;}	//Disease
-        else if (index == 20) {mod = 90;}   //Will
-        else if (index == 16) {mod = 18;}	//Soul Departure
-        else if (index == 17) {mod = 0.5;}	//Recovery Multiplier
-        else if (index == 18) {mod = 1;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 50) {		//-------Half-orc-------
-        if (index == 1) {mod = 0;} 			//Ag 
-        else if (index == 2) {mod = 2;}		//Co
-        else if (index == 3) {mod = 0;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = 2;}		//SD
-        else if (index == 6) {mod = 0;}		//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = 0;}		//Pr
-        else if (index == 9) {mod = 0;}		//Qu
-        else if (index == 10) {mod = 2;}	//St
-        else if (index == 11) {mod = 0;}	//Ess
-        else if (index == 12) {mod = 0;}	//Chan
-        else if (index == 13) {mod = 0;}	//Ment
-        else if (index == 14) {mod = 5;}	//Poison
-        else if (index == 15) {mod = 5;}	//Disease
-        else if (index == 20) {mod = 0;}    //Will
-        else if (index == 16) {mod = 6;}	//Soul Departure
-        else if (index == 17) {mod = 0.75;}	//Recovery Multiplier
-        else if (index == 18) {mod = 2;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 10;}	//Bonus Exhaustion Points
-    } else if (racialindex == 51) {		//-------Common Orc-------
-        if (index == 1) {mod = 0;} 			//Ag 
-        else if (index == 2) {mod = 2;}		//Co
-        else if (index == 3) {mod = -4;}	//Me
-        else if (index == 4) {mod = -2;}	//Re
-        else if (index == 5) {mod = -4;}	//SD
-        else if (index == 6) {mod = -2;}	//Em
-        else if (index == 7) {mod = -4;}	//In
-        else if (index == 8) {mod = -2;}	//Pr
-        else if (index == 9) {mod = 0;}		//Qu
-        else if (index == 10) {mod = 2;}	//St
-        else if (index == 11) {mod = 0;}	//Ess
-        else if (index == 12) {mod = 0;}	//Chan
-        else if (index == 13) {mod = 0;}	//Ment
-        else if (index == 14) {mod = 0;}	//Poison
-        else if (index == 15) {mod = 5;}	//Disease
-        else if (index == 20) {mod = 0;}    //Will
-        else if (index == 16) {mod = 1;}	//Soul Departure
-        else if (index == 17) {mod = 0.5;}	//Recovery Multiplier
-        else if (index == 18) {mod = 2;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 20;}	//Bonus Exhaustion Points
-    } else if (racialindex == 52) {		//-------Greater Orc-------
-        if (index == 1) {mod = 0;} 			//Ag 
-        else if (index == 2) {mod = 4;}		//Co
-        else if (index == 3) {mod = -2;}	//Me
-        else if (index == 4) {mod = -2;}	//Re
-        else if (index == 5) {mod = -2;}	//SD
-        else if (index == 6) {mod = -2;}	//Em
-        else if (index == 7) {mod = -2;}	//In
-        else if (index == 8) {mod = -2;}	//Pr
-        else if (index == 9) {mod = 0;}		//Qu
-        else if (index == 10) {mod = 4;}	//St
-        else if (index == 11) {mod = 0;}	//Ess
-        else if (index == 12) {mod = 0;}	//Chan
-        else if (index == 13) {mod = 0;}	//Ment
-        else if (index == 14) {mod = 5;}	//Poison
-        else if (index == 15) {mod = 10;}	//Disease
-        else if (index == 20) {mod = 0;}    //Will
-        else if (index == 16) {mod = 1;}	//Soul Departure
-        else if (index == 17) {mod = 0.5;}	//Recovery Multiplier
-        else if (index == 18) {mod = 2;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 30;}	//Bonus Exhaustion Points
-    } else if (racialindex == 52) {		//-------None; Reset to zero-------
-        if (index == 1) {mod = 0;} 			//Ag 
-        else if (index == 2) {mod = 0;}		//Co
-        else if (index == 3) {mod = 0;}		//Me
-        else if (index == 4) {mod = 0;}		//Re
-        else if (index == 5) {mod = 0;}		//SD
-        else if (index == 6) {mod = 0;}		//Em
-        else if (index == 7) {mod = 0;}		//In
-        else if (index == 8) {mod = 0;}		//Pr
-        else if (index == 9) {mod = 0;}		//Qu
-        else if (index == 10) {mod = 0;}	//St
-        else if (index == 11) {mod = 0;}	//Ess
-        else if (index == 12) {mod = 0;}	//Chan
-        else if (index == 13) {mod = 0;}	//Ment
-        else if (index == 14) {mod = 0;}	//Poison
-        else if (index == 15) {mod = 0;}	//Disease
-        else if (index == 20) {mod = 0;}    //Will
-        else if (index == 16) {mod = 0;}	//Soul Departure
-        else if (index == 17) {mod = 0;}	//Recovery Multiplier
-        else if (index == 18) {mod = 0;}	//Race Type for Stat Loss
-        else if (index == 19) {mod = 0;}	//Bonus Exhaustion Points
-    } else if (racialindex == 1) {mod = currentval;}		//------Custom------
-    //	  console.log('/* ----------leaving RaceFixedInfoSetup mod:'+mod+'------------ */');
-    return mod;  
-}
-  
+   
 // <!-- Profession Bonus for Skill Categories Setup -->
 // takes a profession index and an index for which skill category and returns Profession bonus for that skill/profession combo.
 function ProfessionInfoSetup(professionindex, index, currentval) {
@@ -12380,7 +12009,7 @@ on ('sheet:opened', function() {
 });
 
 //  <!-- Update copied OB if the weapon/attack skill changes.  Have to check them all since don't know if/where the attack might be  -->
-on ('change:weapon1hc1 change:weapon1hc2 change:weapon1hc3 change:weapon1he1 change:weapon1he2 change:weapon1he3 change:weapon2hand1 change:weapon2hand2 change:weapon2hand3 change:weaponmissile1 change:weaponmissile2 change:weaponmissile3 change:weaponmissileart1 change:weaponmissileart2 change:weaponmissileart3 change:weaponpolearm1 change:weaponpolearm2 change:weaponpolearm3 change:weaponthrown1 change:weaponthrown2 change:weaponthrown3 change:weapon1hc1name change:weapon1hc2name change:weapon1hc3name change:weapon1he1name change:weapon1he2name change:weapon1he3name change:weapon2hand1name change:weapon2hand2name change:weapon2hand3name change:weaponmissile1name change:weaponmissile2name change:weaponmissile3name change:weaponmissileart1name change:weaponmissileart2name change:weaponmissileart3name change:weaponpolearm1name change:weaponpolearm2name change:weaponpolearm3name change:weaponthrown1name change:weaponthrown2name change:weaponthrown3name change:sweeps1 change:sweeps2 change:sweeps3 change:sweeps4 change:striking1 change:striking2 change:striking3 change:striking4 change:boxing change:tackling change:blocking change:wrestling change:brawling change:subdual change:mountedcombat change:shockbolt change:firebolt change:icebolt change:lightningbolt change:waterbolt change:boltattack6 change:boltattack6name change:twoweaponfighting1 change:twoweaponfighting1name change:reversestroke1 change:reversestroke1name change:copyob', function () {
+on ('change:weapon1hc1 change:weapon1hc2 change:weapon1hc3 change:weapon1he1 change:weapon1he2 change:weapon1he3 change:weapon2hand1 change:weapon2hand2 change:weapon2hand3 change:weaponmissile1 change:weaponmissile2 change:weaponmissile3 change:weaponmissileart1 change:weaponmissileart2 change:weaponmissileart3 change:weaponpolearm1 change:weaponpolearm2 change:weaponpolearm3 change:weaponthrown1 change:weaponthrown2 change:weaponthrown3 change:weapon1namehc1name change:weapon1namehc2name change:weapon1namehc3name change:weapon1namehe1name change:weapon1namehe2name change:weapon1namehe3name change:weapon2namehand1name change:weapon2namehand2name change:weapon2namehand3name change:weaponmissile1name change:weaponmissile2name change:weaponmissile3name change:weaponmissileart1name change:weaponmissileart2name change:weaponmissileart3name change:weaponpolearm1name change:weaponpolearm2name change:weaponpolearm3name change:weaponthrown1name change:weaponthrown2name change:weaponthrown3name change:sweeps1 change:sweeps2 change:sweeps3 change:sweeps4 change:striking1 change:striking2 change:striking3 change:striking4 change:boxing change:tackling change:blocking change:wrestling change:brawling change:subdual change:mountedcombat change:shockbolt change:firebolt change:icebolt change:lightningbolt change:waterbolt change:boltattack6 change:boltattack6name change:twoweaponfighting1 change:twoweaponfighting1name change:reversestroke1 change:reversestroke1name change:copyob', function () {
     getAttrs(['copyob'], function(values) {
         if (parseInt(values.copyob) == 1){
             WeaponOBCopy('attack1'); 
@@ -14209,43 +13838,47 @@ on('sheet:opened change:race', function() {
 }); 
 
 //	<!---- Update Body Dev progression,Racial bonuses for RR's and Stats etc when race changes.---->	
-on('change:racialindex change:racialcalc', function() {
-    getAttrs(['racialindex', 'bodydevprog0', 'bodydevprog10', 'bodydevprog20', 'bodydevprog30', 'bodydevprog31', 'agracial', 'coracial', 'meracial', 'reracial', 'sdracial', 'emracial', 'inracial', 'prracial', 'quracial', 'stracial', 'esssaverace', 'chansaverace', 'mentsaverace', 'poisonsaverace', 'diseasesaverace', 'willsaverace', 'souldepart', 'recoverymult', 'racialnotes', 'racialcalc', 'racetypeforstatloss', 'exhaustmiscbonus'], function(values) {
-        //   console.log('/* ---------- can we set up racial bonuses?------------ */');
-        if (parseInt(values.racialcalc) == 1){
-            //   console.log('/* ---------- racial calc is 1; setup racialbonuses etc!------------ */');
-            setAttrs({
-                bodydevprog0: BodyDevProgMod(parseInt(values.racialindex,10), 0, parseInt(values.bodydevprog0,10)),
-                bodydevprog10: BodyDevProgMod(parseInt(values.racialindex,10), 10, parseInt(values.bodydevprog10,10)),
-                bodydevprog20: BodyDevProgMod(parseInt(values.racialindex,10), 20, parseInt(values.bodydevprog20,10)),
-                bodydevprog30: BodyDevProgMod(parseInt(values.racialindex,10), 30, parseInt(values.bodydevprog30,10)),
-                bodydevprog31: BodyDevProgMod(parseInt(values.racialindex,10), 31, parseInt(values.bodydevprog31,10)),
-                agracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 1, parseInt(values.agracial,10)), 
-                coracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 2, parseInt(values.coracial,10)), 
-                meracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 3, parseInt(values.meracial,10)), 
-                reracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 4, parseInt(values.reracial,10)), 
-                sdracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 5, parseInt(values.sdracial,10)), 
-                emracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 6, parseInt(values.emracial,10)), 
-                inracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 7, parseInt(values.inracial,10)), 
-                prracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 8, parseInt(values.prracial,10)), 
-                quracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 9, parseInt(values.quracial,10)), 
-                stracial: RaceFixedInfoSetup(parseInt(values.racialindex,10), 10, parseInt(values.stracial,10)), 
-                esssaverace: RaceFixedInfoSetup(parseInt(values.racialindex,10), 11, parseInt(values.esssaverace,10)), 
-                chansaverace: RaceFixedInfoSetup(parseInt(values.racialindex,10), 12, parseInt(values.chansaverace,10)), 
-                mentsaverace: RaceFixedInfoSetup(parseInt(values.racialindex,10), 13, parseInt(values.mentsaverace,10)), 
-                poisonsaverace: RaceFixedInfoSetup(parseInt(values.racialindex,10), 14, parseInt(values.poisonsaverace,10)), 
-                diseasesaverace: RaceFixedInfoSetup(parseInt(values.racialindex,10), 15, parseInt(values.diseasesaverace,10)), 
-                willsaverace: RaceFixedInfoSetup(parseInt(values.racialindex,10), 20, parseInt(values.willsaverace,10)),
-                souldepart: RaceFixedInfoSetup(parseInt(values.racialindex,10), 16, parseInt(values.souldepart,10)),
-                recoverymult: RaceFixedInfoSetup(parseInt(values.racialindex,10), 17, parseInt(values.recoverymult,10)), 
-                racetypeforstatloss: RaceFixedInfoSetup(parseInt(values.racialindex,10), 18, parseInt(values.racetypeforstatloss,10)),
-                exhaustmiscbonus: RaceFixedInfoSetup(parseInt(values.racialindex,10), 19, parseInt(values.exhaustmiscbonus,10))
+on('change:race change:racialcalc', function() {
+    getAttrs(['race', 'racialnotes', 'racialcalc'], function(values) {
+        console.log('/* ---------- can we set up racial bonuses?------------ */');
+        // first set up a table of mods for all the racial stats.
+        // note you can put linespaces after any comma here, if you want to arrange it so its easily read.
+        const modsbyrace = {
+            'common man': {bodydevprog0:0, bodydevprog10:6, bodydevprog20:4, bodydevprog30:2, bodydevprog31:1, agracial: 0, coracial: 0, meracial:  0, reracial:  0, sdracial:  2, emracial: 0, inracial: 0, prracial:  0, quracial: 0, stracial:  2, esssaverace: 0, chansaverace:  0, mentsaverace:  0, poisonsaverace:  0, diseasesaverace:  0, willsaverace:  0, souldepart:  12, recoverymult:  1, racetypeforstatloss:  2, exhaustmiscbonus: 0}, 
+            'mixed man': {bodydevprog0:0, bodydevprog10:6, bodydevprog20:5, bodydevprog30:2, bodydevprog31:1, agracial: 0, coracial:2, meracial:  0, reracial:  0, sdracial:  2, emracial: 2, inracial: 0, prracial:  2, quracial: 0, stracial:  2, esssaverace: 0, chansaverace:  0, mentsaverace:  0, poisonsaverace:  0, diseasesaverace:  0, willsaverace:  0, souldepart:  11, recoverymult:  0.9, racetypeforstatloss:  2, exhaustmiscbonus: 0},
+            'high man': {bodydevprog0:0, bodydevprog10:7, bodydevprog20:5, bodydevprog30:3, bodydevprog31:1, agracial: -2, coracial: 4, meracial:  0, reracial:  0, sdracial:  0, emracial: 0, inracial: 0, prracial:  4, quracial: -2, stracial:  4, esssaverace: -5, chansaverace:  -5, mentsaverace:  -5, poisonsaverace:  0, diseasesaverace:  0, willsaverace:  0, souldepart:  10, recoverymult:  0.75, racetypeforstatloss:  2, exhaustmiscbonus: 0}, 
+            'half-elf': {bodydevprog0:0, bodydevprog10:7, bodydevprog20:5, bodydevprog30:3, bodydevprog31:1, agracial: 2, coracial: 2, meracial:  0, reracial:  0, sdracial:  -3, emracial: 0, inracial: 0, prracial:  4, quracial: 4, stracial:  2, esssaverace: -5, chansaverace:  -5, mentsaverace:  -5, poisonsaverace:  0, diseasesaverace:  50, willsaverace:  -15, souldepart: 6, recoverymult:  1.5, racetypeforstatloss:  3, exhaustmiscbonus: 0}, 
+            'wood elf': {bodydevprog0:0, bodydevprog10:6, bodydevprog20:3, bodydevprog30:1, bodydevprog31:1, agracial: 4, coracial: 0, meracial:  2, reracial:  0, sdracial:  -5, emracial:2, inracial: 0, prracial:  2, quracial: 2, stracial:  0, esssaverace: -5, chansaverace:  -5, mentsaverace:  -5, poisonsaverace:  10, diseasesaverace:  100, willsaverace:  -15, souldepart: 3, recoverymult:  1.5, racetypeforstatloss:  3, exhaustmiscbonus: 0},
+            'grey elf': {bodydevprog0:0, bodydevprog10:6, bodydevprog20:3, bodydevprog30:2, bodydevprog31:1, agracial: 2, coracial: 0, meracial:  2, reracial:  0, sdracial:  -5, emracial:2, inracial: 0, prracial:  4, quracial: 4, stracial:  0, esssaverace: -5, chansaverace:  -5, mentsaverace:  -5, poisonsaverace:  10, diseasesaverace:  100, willsaverace:  -15, souldepart: 2, recoverymult:  2, racetypeforstatloss:  4, exhaustmiscbonus: 0}, 
+            'high elf': {bodydevprog0:0, bodydevprog10:7, bodydevprog20:3, bodydevprog30:2, bodydevprog31:1, agracial: 2, coracial: 0, meracial:  2, reracial:  0, sdracial:  -5, emracial:2, inracial: 0, prracial:  6, quracial: 6, stracial:  0, esssaverace: -5, chansaverace:  -5, mentsaverace:  -5, poisonsaverace:  10, diseasesaverace:  100, willsaverace:  -15, souldepart: 1, recoverymult:  3, racetypeforstatloss:  5, exhaustmiscbonus: 0}, 
+            'dwarf': {bodydevprog0:0, bodydevprog10:7, bodydevprog20:4, bodydevprog30:2, bodydevprog31:1, agracial: -2, coracial: 6, meracial:  0, reracial:  0, sdracial:  2, emracial: -4, inracial:  0, prracial:  -4, quracial:  -2, stracial:  2, esssaverace: 40, chansaverace:  0, mentsaverace:  40, poisonsaverace:  20, diseasesaverace:  15, willsaverace:  80, souldepart:  21, recoverymult:  0.5, racetypeforstatloss:  1, exhaustmiscbonus: 0}, 
+            'halfling': {bodydevprog0:0, bodydevprog10:6, bodydevprog20:2, bodydevprog30:2, bodydevprog31:1, agracial: 6, coracial: 6, meracial:  0, reracial:  0, sdracial:  -4, emracial:-2, inracial:  0, prracial:  -6, quracial:  4, stracial:  -8, esssaverace: 40, chansaverace:  0, mentsaverace:  40, poisonsaverace:  30, diseasesaverace:  15, willsaverace:  90, souldepart:  18, recoverymult:  0.5, racetypeforstatloss:  1, exhaustmiscbonus: 0}, 
+            'half-orc': {bodydevprog0:0, bodydevprog10:7, bodydevprog20:4, bodydevprog30:2, bodydevprog31:1, agracial: 0, coracial: 2, meracial:  0, reracial:  0, sdracial:  2, emracial: 0, inracial: 0, prracial:  0, quracial: 0, stracial:  2, esssaverace: 0, chansaverace:  0, mentsaverace:  0, poisonsaverace:  5, diseasesaverace:  5, willsaverace:  0, souldepart:  6, recoverymult:  0.75, racetypeforstatloss:  2, exhaustmiscbonus: 10}, 
+            'common orc': {bodydevprog0:0, bodydevprog10:6, bodydevprog20:3, bodydevprog30:2, bodydevprog31:1, agracial: 0, coracial: 2, meracial:  -4, reracial:-2, sdracial:-4, emracial:-2, inracial:  -4, prracial:-2, quracial:  0, stracial:  2, esssaverace: 0, chansaverace:  0, mentsaverace:  0, poisonsaverace:  0, diseasesaverace:  5, willsaverace:  0, souldepart:  1, recoverymult:  0.5, racetypeforstatloss:  2, exhaustmiscbonus: 20}, 
+            'greater orc': {bodydevprog0:0, bodydevprog10:7, bodydevprog20:3, bodydevprog30:2, bodydevprog31:1, agracial: 0, coracial: 4, meracial:  -2, reracial:-2, sdracial:-2, emracial:-2, inracial:  -2, prracial:-2, quracial:  0, stracial:  4, esssaverace: 0, chansaverace:  0, mentsaverace:  0, poisonsaverace:  5, diseasesaverace:  10, willsaverace:  0, souldepart:  1, recoverymult:  0.5, racetypeforstatloss:  2, exhaustmiscbonus: 30}, 
+            'none': {bodydevprog0:0, bodydevprog10:0, bodydevprog20:0, bodydevprog30:0, bodydevprog31:0, agracial: 0, coracial: 0, meracial:  0, reracial:  0, sdracial:  0, emracial: 0, inracial: 0, prracial:  0, quracial: 0, stracial:  0, esssaverace: 0, chansaverace:  0, mentsaverace:  0, poisonsaverace:  0, diseasesaverace:  0, willsaverace:  0, souldepart:  0, recoverymult:  0, racetypeforstatloss:  0, exhaustmiscbonus: 0}
+        };
+        // the following check can be removed completely, unless its used for other purposes like in CSS. 
+        //    If removing, can remove it from the change and getAttrs lines.
+        if (parseInt(values.racialcalc) == 1) {
+            console.log('/* ---------- racial calc is 1; setup racialbonuses etc!------------ */');
+            const race = values.race.toLowerCase();
+            if (modsbyrace.hasOwnProperty(race)) {
+                // race exists in data set above so use it. Might only need this, not the racialindex.
+                const mods = modsbyrace[race];
+                setAttrs(mods);
+
+                // Note: skill bonuses would probably be handled best in a skill worker.
                 // racial skill bonuses? Swimming (-50 for dwarves), Scaling(+20 Hillmen), Acrobatics(+20 Hillmen, Woodmen), Public Speaking(+20 Hillmen), Acting(+20 Hillmen), Boat Piloting(+20 Mariners), Navigation(+20 Mariners), Rope Mastery(+20 Mariners), Rowing(+20 Mariners), Sailing(+20 Mariners), Star-gazing(+20 Mariners), Weather Watching(+20 Mariners), Mounted Combat(+20 Nomads), all Outdoor-Animal skills(+20 Nomads), Trickery(+10 Wood-elves), Stalking(+10 Wood-elves), Hiding(+10 Wood-elves), Climbing(+20 Woodmen), Foraging(+10 Woodmen), bard based spell attacks (+10 Wood-elves)?,  Awareness involving hearing (+10 elves)???, + DB/RR for heat and/or cold (various)
+
                 // racial notes?    (maybe but how to keep it from over-writing what's there or inserting itself again everytime??)
-            });
+                // The simple solution is to add racialnotes: to the race data object above, then it's be printed automatically, replacing whats there at
+                //    no loss in performance, since its just part of a single setAttrs. 
+
+            }
         }
     });
-//   console.log('/* ---------- exiting set up racial bonuses call------------ */');
+   console.log('/* ---------- exiting set up racial bonuses call------------ */');
 });
   
 //  <!---- Then update Bodydev rank bonus ............ even if rank has not changed ----->
@@ -14357,7 +13990,7 @@ on('change:realmselect change:racialindex change:racialcalc', function() {
 }); 
   
 //  <!---- Then update PPdev rank bonus ........... even if rank has not changed ----->
-on('change:realm change:ppdevranks change:ppdevprog0 change:ppdevprog10 change:ppdevprog20 change:ppdevprog30 change:ppdevprog31 change:skillcalc', function() {   // might not need realm here.
+on('change:realm change:ppdevranks change:ppdevprog0 change:ppdevprog10 change:ppdevprog20 change:ppdevprog30 change:ppdevprog31 change:skillcalc change:racialcalc change:inbonus change:embonus change:prbonus', function() {
     getAttrs(['ppdevranks', 'ppdevprog0', 'ppdevprog10', 'ppdevprog20', 'ppdevprog30', 'ppdevprog31', 'skillcalc', 'racialcalc'], function(values) {
         //  console.log('/* ------------------ppdevranks:'+parseInt(values.ppdevranks,10)+' ppdevprog0:'+parseFloat(values.ppdevprog0)+' ppdevprog10:'+parseFloat(values.ppdevprog10)+' ppdevprog20:'+parseFloat(values.ppdevprog20)+' ppdevprog30:'+parseFloat(values.ppdevprog30)+' ppdevprog31:'+parseFloat(values.ppdevprog31)+'-----------*/');
         if ((parseInt(values.skillcalc,10) == 1)) {
