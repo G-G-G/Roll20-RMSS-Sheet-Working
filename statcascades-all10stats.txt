@@ -30,12 +30,10 @@ Agility stat change
 									missileartillery3 skill changed. try to update the OB on the attacks table (Line 12383)
 										this calls WeaponOBCopy (Line 11915)
 				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 12469 and the setAttrs at line 12524 -Or- the one at line 12551 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). I can type them all out but it will take a while..
-					
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
-
-SkillChange (Line 11718); onchange is setup on Line 14381
-CalcTotalBonus (Line 11841); onchange is setup on Line 14383
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 
 Constitution stat change
 	Co base bonus change (Line 13994)
@@ -59,6 +57,8 @@ Constitution stat change
 				.... continue^ for the rest of the skills listed in the setAttrs at line 12592.
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 
 Memory stat change
 	Me base bonus change (Line 14010)
@@ -97,6 +97,8 @@ Memory stat change
 				recalculate and update the repeating_languages and summary (Line 14402)
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 
 Reasoning stat change
 	Re base bonus change (Line 14026)
@@ -127,6 +129,8 @@ Reasoning stat change
 				recalculate and update the repeating_languages and summary (Line 14402)
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 
 Self Discipline stat change
 	SD base bonus change (Line 14042)
@@ -165,6 +169,8 @@ Self Discipline stat change
 				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 12949 and the setAttrs at line 12981 -Or- the one at line 13026 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). 
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 
 Empathy stat change	
 	Em base bonus change (Line 14058)
@@ -204,6 +210,8 @@ Empathy stat change
 				recalculate and update the repeating_languages and summary (Line 14402)
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 
 Intuition stat change
 	In base bonus change (Line 14074)
@@ -248,6 +256,8 @@ Intuition stat change
 										for each spell list skill call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 
 Presence stat change
 	Pr base bonus change (Line 14090)
@@ -286,6 +296,8 @@ Presence stat change
 										for each spell list skill call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 
 Quickness stat change
 	Qu base bonus change (Line 14106)
@@ -309,6 +321,8 @@ Quickness stat change
 					If adrenalspeed changed (depending on sheet setup), then for adrenalspeed call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
 
 Strength stat change
 	St base bonus change (Line 14122)
@@ -358,4 +372,6 @@ Strength stat change
 				.... continue^ for the rest of the skill categories and skills listed in the setAttrs at line 13057 and the setAttrs at line 13089 -Or- the one at line 13104 depending on the sheet setup (variablestatbonuscalc is the toggle for the 2 ways of determining which stats to use). 
 			change stat bonus for skills with dropdowns (Line 12457)
 			     calls DropdownStatChange (Line 11879)
+					for each skill updated call SkillChange (Line 11718); onchange is setup on Line 14381
+						for each skill updated call CalcTotalBonus (Line 11841); onchange is setup on Line 14383
   
