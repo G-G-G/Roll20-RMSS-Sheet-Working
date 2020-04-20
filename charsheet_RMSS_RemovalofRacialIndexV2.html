@@ -11280,18 +11280,19 @@ function SetRealm(rselect, intmod, empmod, premod) {
 // and <!---- update realm stat when realm or realm stat changes---->   
 on('change:realmselect change:race change:racialcalc change:inbonus change:embonus change:prbonus', function () {
     //   console.log('/* ---------- entering ppsetup and realm call------------ */');
-
-    getAttrs(['realmselect', 'race', 'inbonus', 'embonus', 'prbonus'], function (values) {
-        const realmindex = int(values.realmselect);
-        // create an empty data object to hold the stat values, that iwll later be sent to setAttrs
-        let output = PPDevProgMod(realmindex, values.race);
-        // if the race is custom this will be empty. But probably should not be - if changing TO custom, should probably erase existing values.
-        // then again thats only true if changing race - changing any other value wouldnt change things
-        
-        // add the realm attribute to output
-        output.realm = SetRealm(realmindex, int(values.inbonus), int(values.embonus), int(values.prbonus));
-        setAttrs(output);
-    });
+	getAttrs(['realmselect', 'racialcalc', 'race', 'inbonus', 'embonus', 'prbonus'], function (values) {		
+    	if (int(values.racialcalc) == 1) {
+			const realmindex = int(values.realmselect);
+			// create an empty data object to hold the stat values, that iwll later be sent to setAttrs
+			let output = PPDevProgMod(realmindex, values.race);
+			// if the race is custom this will be empty. But probably should not be - if changing TO custom, should probably erase existing values.
+			// then again thats only true if changing race - changing any other value wouldnt change things
+			
+			// add the realm attribute to output
+			output.realm = SetRealm(realmindex, int(values.inbonus), int(values.embonus), int(values.prbonus));
+			setAttrs(output);
+		}
+	});
     //   console.log('/* ---------- exiting ppdev and realm setup call------------ */');
 });
    
