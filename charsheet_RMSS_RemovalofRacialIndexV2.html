@@ -1,10 +1,10 @@
 <!-- RoleMaster Standard System Character Sheet -->
 <!-- by Diana P. -->
 <!-- I borrowed some code/equations from Brian. And Sam. And Aaron I. And others -->
-<!-- Version 2.4.20 (sheetworker optimization) dated 04/15/2020 -->
+<!-- Version 2.4.20 (sheetworker optimization) dated 04/19/2020 -->
 <input type="hidden" name="attr_character_sheet" title="character-sheet" value="RMSS-FullCalcs"/>
 <input type="hidden" name="attr_currentsheetversion" title="currentsheetversion" value="4.20" />
-<p style="font-size: 0.6em;">V2.<span name="attr_sheetversion" title="sheetversion" ></span> 04/15/2020 by Diana P.</p>
+<p style="font-size: 0.6em;">V2.<span name="attr_sheetversion" title="sheetversion" ></span> 04/19/2020 by Diana P.</p>
 <input type="checkbox" class="announcement-show cbox" title="announcement-show" name="attr_announcement-show" value="1" checked />
 <div class="announcement">
 	<div class="table-style">
@@ -11127,7 +11127,9 @@ function SetRealm(rselect, intmod, empmod, premod) {
     //	  console.log('/* ----------leaving SetRealmMod mod:'+mod+'------------ */');
     return mod;  
 }
-  
+
+// <!-- Power Point Dev Progression Setup -->
+// takes race and returns powerpointdev progression matrix.
 function PPDevProgMod(rselect, race) {
     const modsbyrace = {
         'common man': {
