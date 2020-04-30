@@ -1,6 +1,3 @@
-<!-- start Sheet Workers Script section-->
-<script type="text/worker">
-
 const combinationprogression = [name, 'combprog0', 'combprog10', 'combprog20', 'combprog30', 'combprog31']; // progression type 1
 const categoryprogression = [name, 'catprog0', 'catprog10', 'catprog20', 'catprog30', 'catprog31']; // progression type 2
 const standardprogression = [name, 'stdprog0', 'stdprog10', 'stdprog20', 'stdprog30', 'stdprog31']; // progression type 3
