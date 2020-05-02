@@ -13766,7 +13766,7 @@ on('change:levelexpcalc change:level', function() {
 //	<!---- Update Body Dev progression,Racial bonuses for RR's and Stats etc when race changes.---->	
 on('change:race change:racialcalc', function() {
     getAttrs(['race', 'racialnotes', 'racialcalc'], function(values) {
-        console.log('/* ---------- can we set up racial bonuses?------------ */');
+       // console.log('/* ---------- can we set up racial bonuses?------------ */');
         // first set up a table of mods for all the racial stats.
         // note you can put linespaces after any comma here, if you want to arrange it so its easily read.
         const modsbyrace = {
@@ -13784,10 +13784,9 @@ on('change:race change:racialcalc', function() {
             'greater orc': {bodydevprog0:0, bodydevprog10:7, bodydevprog20:3, bodydevprog30:2, bodydevprog31:1, agracial: 0, coracial: 4, meracial:  -2, reracial:-2, sdracial:-2, emracial:-2, inracial:  -2, prracial:-2, quracial:  0, stracial:  4, esssaverace: 0, chansaverace:  0, mentsaverace:  0, poisonsaverace:  5, diseasesaverace:  10, willsaverace:  0, souldepart:  1, recoverymult:  0.5, racetypeforstatloss:  2, exhaustmiscbonus: 30}, 
             'none': {bodydevprog0:0, bodydevprog10:0, bodydevprog20:0, bodydevprog30:0, bodydevprog31:0, agracial: 0, coracial: 0, meracial:  0, reracial:  0, sdracial:  0, emracial: 0, inracial: 0, prracial:  0, quracial: 0, stracial:  0, esssaverace: 0, chansaverace:  0, mentsaverace:  0, poisonsaverace:  0, diseasesaverace:  0, willsaverace:  0, souldepart:  0, recoverymult:  0, racetypeforstatloss:  0, exhaustmiscbonus: 0}
         };
-        // the following check can be removed completely, unless its used for other purposes like in CSS. 
-        //    If removing, can remove it from the change and getAttrs lines.
+        // check to make sure that it's ok to do the racial setup per the setup tab
         if (parseInt(values.racialcalc) == 1) {
-            console.log('/* ---------- racial calc is 1; setup racialbonuses etc!------------ */');
+            //console.log('/* ---------- racial calc is 1; setup racialbonuses etc!------------ */');
             const race = values.race.toLowerCase();
             if (modsbyrace.hasOwnProperty(race)) {
                 // race exists in data set above so use it.
@@ -13804,7 +13803,7 @@ on('change:race change:racialcalc', function() {
             }
         }
     });
-   console.log('/* ---------- exiting set up racial bonuses call------------ */');
+   //console.log('/* ---------- exiting set up racial bonuses call------------ */');
 });
   
 //  <!---- Then update Bodydev rank bonus ............ even if rank has not changed ----->
@@ -13834,7 +13833,7 @@ on('change:realm change:ppdevranks change:ppdevprog0 change:ppdevprog10 change:p
 //	<!---- Update Profession Bonuses when Profession changes.---->	
 on('change:profession change:professioncalc', function() {
     getAttrs(['profession', 'professioncalc'], function(values) {
-        console.log('/* ---------- can we set up profession bonuses?------------ */');
+        //console.log('/* ---------- can we set up profession bonuses?------------ */');
         // first set up a table of mods for all the profession bonuses.
         const profbonusbyprofession = {
 			'none': {'cat-armor-heavy-profbonus': 0, 'cat-armor-light-profbonus': 0, 'cat-armor-med-profbonus': 0, 'cat-artistic-active-profbonus': 0, 'cat-artistic-passive-profbonus': 0, 'cat-athletic-brawn-profbonus': 0, 'cat-athletic-endur-profbonus': 0, 'cat-athletic-gym-profbonus': 0, 'cat-aware-percept-profbonus': 0, 'cat-aware-search-profbonus': 0, 'cat-aware-senses-profbonus': 0, 'bodydevcatbonus': 0, 'cat-combat-maneuvers-profbonus': 0, 'cat-communications-profbonus': 0, 'cat-crafts-profbonus': 0, 'cat-directed-spells-profbonus': 0, 'cat-influence-profbonus': 0, 'cat-lore-general-profbonus': 0, 'cat-lore-magical-profbonus': 0, 'cat-lore-obscure-profbonus': 0, 'cat-lore-technical-profbonus': 0, 'cat-ma-striking-profbonus': 0, 'cat-ma-sweeps-profbonus': 0, 'cat-outdoor-animal-profbonus': 0, 'cat-outdoor-environ-profbonus': 0, 'cat-power-awareness-profbonus': 0, 'cat-power-manipulation-profbonus': 0, 'ppdevcatbonus': 0, 'cat-science-basic-profbonus': 0, 'cat-science-specialized-profbonus': 0, 'cat-self-control-profbonus': 0, 'cat-special-attacks-profbonus': 0, 'cat-srobprofbonus': 0, 'cat-sropenprofbonus': 0, 'cat-srclosedprofbonus': 0, 'cat-srotherbprofbonus': 0, 'cat-oropenprofbonus': 0, 'cat-orclosedprofbonus': 0, 'cat-orbaseprofbonus': 0, 'cat-arcopenprofbonus': 0, 'cat-arcclosedprofbonus': 0, 'cat-arcbaseprofbonus': 0, 'cat-arcotherbaseprofbonus': 0, 'cat-subterfuge-attack-profbonus': 0, 'cat-subterfuge-mechanics-profbonus': 0, 'cat-subterfuge-stealth-profbonus': 0, 'cat-tech-general-profbonus': 0, 'cat-tech-professional': 0, 'cat-tech-vocational-profbonus': 0, 'cat-urban-profbonus': 0, 'cat-weapon-1hconcussion-profbonus': 0, 'cat-weapon-1hedged-profbonus': 0, 'cat-weapon-2handed-profbonus': 0, 'cat-weapon-missile-profbonus': 0, 'cat-weapon-missileartillery-profbonus': 0, 'cat-weapon-polearms-profbonus': 0, 'cat-weapon-thrown-profbonus': 0},
@@ -13859,10 +13858,9 @@ on('change:profession change:professioncalc', function() {
 			'bard': {'cat-armor-heavy-profbonus': 0, 'cat-armor-light-profbonus': 0, 'cat-armor-med-profbonus': 0, 'cat-artistic-active-profbonus': 5, 'cat-artistic-passive-profbonus': 0, 'cat-athletic-brawn-profbonus': 0, 'cat-athletic-endur-profbonus': 0, 'cat-athletic-gym-profbonus': 0, 'cat-aware-percept-profbonus': 5, 'cat-aware-search-profbonus': 5, 'cat-aware-senses-profbonus': 5, 'bodydevcatbonus': 5, 'cat-combat-maneuvers-profbonus': 0, 'cat-communications-profbonus': 5, 'cat-crafts-profbonus': 0, 'cat-directed-spells-profbonus': 0, 'cat-influence-profbonus': 5, 'cat-lore-general-profbonus': 10, 'cat-lore-magical-profbonus': 10, 'cat-lore-obscure-profbonus': 10, 'cat-lore-technical-profbonus': 10, 'cat-ma-striking-profbonus': 0, 'cat-ma-sweeps-profbonus': 0, 'cat-outdoor-animal-profbonus': 0, 'cat-outdoor-environ-profbonus': 0, 'cat-power-awareness-profbonus': 5, 'cat-power-manipulation-profbonus': 0, 'ppdevcatbonus': 0, 'cat-science-basic-profbonus': 0, 'cat-science-specialized-profbonus': 0, 'cat-self-control-profbonus': 5, 'cat-special-attacks-profbonus': 0, 'cat-srobprofbonus': 0, 'cat-sropenprofbonus': 0, 'cat-srclosedprofbonus': 0, 'cat-srotherbprofbonus': 0, 'cat-oropenprofbonus': 0, 'cat-orclosedprofbonus': 0, 'cat-orbaseprofbonus': 0, 'cat-arcopenprofbonus': 0, 'cat-arcclosedprofbonus': 0, 'cat-arcbaseprofbonus': 0, 'cat-arcotherbaseprofbonus': 0, 'cat-subterfuge-attack-profbonus': 0, 'cat-subterfuge-mechanics-profbonus': 0, 'cat-subterfuge-stealth-profbonus': 0, 'cat-tech-general-profbonus': 0, 'cat-tech-professional': 0, 'cat-tech-vocational-profbonus': 0, 'cat-urban-profbonus': 0, 'cat-weapon-1hconcussion-profbonus': 5, 'cat-weapon-1hedged-profbonus': 5, 'cat-weapon-2handed-profbonus': 5, 'cat-weapon-missile-profbonus': 5, 'cat-weapon-missileartillery-profbonus': 5, 'cat-weapon-polearms-profbonus': 5, 'cat-weapon-thrown-profbonus': 5},
 			'magent': {'cat-armor-heavy-profbonus': 0, 'cat-armor-light-profbonus': 0, 'cat-armor-med-profbonus': 0, 'cat-artistic-active-profbonus': 0, 'cat-artistic-passive-profbonus': 0, 'cat-athletic-brawn-profbonus': 0, 'cat-athletic-endur-profbonus': 0, 'cat-athletic-gym-profbonus': 0, 'cat-aware-percept-profbonus': 10, 'cat-aware-search-profbonus': 10, 'cat-aware-senses-profbonus': 10, 'bodydevcatbonus': 5, 'cat-combat-maneuvers-profbonus': 0, 'cat-communications-profbonus': 5, 'cat-crafts-profbonus': 0, 'cat-directed-spells-profbonus': 0, 'cat-influence-profbonus': 5, 'cat-lore-general-profbonus': 0, 'cat-lore-magical-profbonus': 0, 'cat-lore-obscure-profbonus': 0, 'cat-lore-technical-profbonus': 0, 'cat-ma-striking-profbonus': 0, 'cat-ma-sweeps-profbonus': 0, 'cat-outdoor-animal-profbonus': 0, 'cat-outdoor-environ-profbonus': 0, 'cat-power-awareness-profbonus': 5, 'cat-power-manipulation-profbonus': 0, 'ppdevcatbonus': 0, 'cat-science-basic-profbonus': 0, 'cat-science-specialized-profbonus': 0, 'cat-self-control-profbonus': 10, 'cat-special-attacks-profbonus': 0, 'cat-srobprofbonus': 0, 'cat-sropenprofbonus': 0, 'cat-srclosedprofbonus': 0, 'cat-srotherbprofbonus': 0, 'cat-oropenprofbonus': 0, 'cat-orclosedprofbonus': 0, 'cat-orbaseprofbonus': 0, 'cat-arcopenprofbonus': 0, 'cat-arcclosedprofbonus': 0, 'cat-arcbaseprofbonus': 0, 'cat-arcotherbaseprofbonus': 0, 'cat-subterfuge-attack-profbonus': 5, 'cat-subterfuge-mechanics-profbonus': 5, 'cat-subterfuge-stealth-profbonus': 5, 'cat-tech-general-profbonus': 0, 'cat-tech-professional': 0, 'cat-tech-vocational-profbonus': 0, 'cat-urban-profbonus': 0, 'cat-weapon-1hconcussion-profbonus': 5, 'cat-weapon-1hedged-profbonus': 5, 'cat-weapon-2handed-profbonus': 5, 'cat-weapon-missile-profbonus': 5, 'cat-weapon-missileartillery-profbonus': 5, 'cat-weapon-polearms-profbonus': 5, 'cat-weapon-thrown-profbonus': 5}
         };
-        // the following check can be removed completely, unless its used for other purposes like in CSS. 
-        //    If removing, can remove it from the change and getAttrs lines.
+        // check to make sure that it's ok to do the profession setup per the setup tab
         if (parseInt(values.professioncalc) == 1) {
-            console.log('/* ---------- profession calc is 1; setup professionbonuses etc!------------ */');
+            //console.log('/* ---------- profession calc is 1; setup professionbonuses etc!------------ */');
             const profession = values.profession.toLowerCase();
             if (profbonusbyprofession.hasOwnProperty(profession)) {
                 // profession exists in data set above so use it.
@@ -13871,7 +13869,7 @@ on('change:profession change:professioncalc', function() {
             }
         }
     });
-   console.log('/* ---------- exiting set up profession bonuses call------------ */');
+   //console.log('/* ---------- exiting set up profession bonuses call------------ */');
 });
   
 //	<!---- Do this for each skill to set up OnChange events ---->	
