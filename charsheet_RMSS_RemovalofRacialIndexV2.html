@@ -1,9 +1,9 @@
 <!-- RoleMaster Standard System Character Sheet -->
 <!-- by Diana P. -->
 <!-- I borrowed some code/equations from Brian. And Sam. And Aaron I. And others -->
-<!-- Version 2.4.22 (sheetworker optimization) dated 05/04/2020 -->
+<!-- Version 2.4.23 (sheetworker optimization) dated 05/04/2020 -->
 <input type="hidden" name="attr_character_sheet" title="character-sheet" value="RMSS-FullCalcs"/>
-<input type="hidden" name="attr_currentsheetversion" title="currentsheetversion" value="4.22" />
+<input type="hidden" name="attr_currentsheetversion" title="currentsheetversion" value="4.23" />
 <p style="font-size: 0.6em;">V2.<span name="attr_sheetversion" title="sheetversion" ></span> 05/04/2020 by Diana P.</p>
 <input type="checkbox" class="announcement-show cbox" title="announcement-show" name="attr_announcement-show" value="1" checked />
 <div class="announcement">
@@ -12782,7 +12782,7 @@ on('change:realm change:skillrecalc', function() {
 });
 
 // <!-- Copy over Armor-Heavy Category Bonus-->
-on('change:cat-armor-heavy', function() {
+on('change:cat-armor-heavy change:skillrecalc', function() {
     getAttrs(['cat-armor-heavy'], function(values) {
         setAttrs({
             platecatbonus: parseInt(values['cat-armor-heavy'],10)||0
@@ -12791,7 +12791,7 @@ on('change:cat-armor-heavy', function() {
 });
   
 // <!-- Copy over Armor-Light Category Bonus-->
-on('change:cat-armor-light', function() {
+on('change:cat-armor-light change:skillrecalc', function() {
     getAttrs(['cat-armor-light'], function(values) {
         setAttrs({
             softleathercatbonus: parseInt(values['cat-armor-light'],10)||0,
@@ -12801,7 +12801,7 @@ on('change:cat-armor-light', function() {
 });
 
 // <!-- Copy over Armor-Medium Category Bonus-->
-on('change:cat-armor-med', function() {
+on('change:cat-armor-med change:skillrecalc', function() {
     getAttrs(['cat-armor-med'], function(values) {
         setAttrs({
             chaincatbonus: parseInt(values['cat-armor-med'],10)||0
@@ -12810,7 +12810,7 @@ on('change:cat-armor-med', function() {
 });
   
 // <!-- Copy over Artistic-Active Category Bonus-->
-on('change:cat-artistic-active', function() {
+on('change:cat-artistic-active change:skillrecalc', function() {
     getAttrs(['cat-artistic-active'], function(values) {
         setAttrs({
             actingcatbonus: parseInt(values['cat-artistic-active'],10)||0,
@@ -12829,7 +12829,7 @@ on('change:cat-artistic-active', function() {
 });
   
 // <!-- Copy over Artistic-Passive Category Bonus-->
-on('change:cat-artistic-passive', function() {
+on('change:cat-artistic-passive change:skillrecalc', function() {
     getAttrs(['cat-artistic-passive'], function(values) {
         setAttrs({
             musiccatbonus: parseInt(values['cat-artistic-passive'],10)||0,
@@ -12841,7 +12841,7 @@ on('change:cat-artistic-passive', function() {
 });
   
 // <!-- Copy over Athletic-Brawn Category Bonus-->
-on('change:cat-athletic-brawn', function() {
+on('change:cat-athletic-brawn change:skillrecalc', function() {
     getAttrs(['cat-athletic-brawn'], function(values) {
         setAttrs({
             athleticgamesbrawn1catbonus: parseInt(values['cat-athletic-brawn'],10)||0,
@@ -12856,7 +12856,7 @@ on('change:cat-athletic-brawn', function() {
 });
 
 // <!-- Copy over Athletic-Endurance Category Bonus-->
-on('change:cat-athletic-endur', function() {
+on('change:cat-athletic-endur change:skillrecalc', function() {
     getAttrs(['cat-athletic-endur'], function(values) {
         setAttrs({
             athleticgamesendur1catbonus: parseInt(values['cat-athletic-endur'],10)||0,
@@ -12872,7 +12872,7 @@ on('change:cat-athletic-endur', function() {
 });
 
 // <!-- Copy over Athletic-Gymnastics Category Bonus-->
-on('change:cat-athletic-gym', function() {
+on('change:cat-athletic-gym change:skillrecalc', function() {
     getAttrs(['cat-athletic-gym'], function(values) {
         setAttrs({
             acrobaticscatbonus: parseInt(values['cat-athletic-gym'],10)||0,
@@ -12897,7 +12897,7 @@ on('change:cat-athletic-gym', function() {
 });
   
 // <!-- Copy over Awareness-Perception Category Bonus-->
-on('change:cat-aware-percept', function() {
+on('change:cat-aware-percept change:skillrecalc', function() {
     getAttrs(['cat-aware-percept'], function(values) {
         setAttrs({
             alertnesscatbonus: parseInt(values['cat-aware-percept'],10)||0,
@@ -12907,7 +12907,7 @@ on('change:cat-aware-percept', function() {
 });
   
 // <!-- Copy over Awareness-Searching Category Bonus-->
-on('change:cat-aware-search', function() {
+on('change:cat-aware-search change:skillrecalc', function() {
     getAttrs(['cat-aware-search'], function(values) {
         setAttrs({
             detecttrapscatbonus: parseInt(values['cat-aware-search'],10)||0,
@@ -12923,7 +12923,7 @@ on('change:cat-aware-search', function() {
 });
   
 // <!-- Copy over Awareness-Senses Category Bonus-->
-on('change:cat-aware-senses', function() {
+on('change:cat-aware-senses change:skillrecalc', function() {
     getAttrs(['cat-aware-senses'], function(values) {
         setAttrs({
             directionsensecatbonus: parseInt(values['cat-aware-senses'],10)||0,
@@ -12940,7 +12940,7 @@ on('change:cat-aware-senses', function() {
 });
   
 // <!-- Copy over Combat-Maneuvers Category Bonus-->
-on('change:cat-combat-maneuvers', function() {
+on('change:cat-combat-maneuvers change:skillrecalc', function() {
     getAttrs(['cat-combat-maneuvers'], function(values) {
         setAttrs({
             adrenaldeflectingcatbonus: parseInt(values['cat-combat-maneuvers'],10)||0,
@@ -12959,7 +12959,7 @@ on('change:cat-combat-maneuvers', function() {
 });
   
 // <!-- Copy over Communications Category Bonus-->
-on('change:cat-communications', function() {
+on('change:cat-communications change:skillrecalc', function() {
     getAttrs(['cat-communications'], function(values) {
         setAttrs({
             'repeating_langs_languagespokencatbonus': parseInt(values['cat-communications'],10)||0,  // does not function......
@@ -12971,7 +12971,7 @@ on('change:cat-communications', function() {
 });
   
 // <!-- Copy over Crafts Category Bonus-->
-on('change:cat-crafts', function() {
+on('change:cat-crafts change:skillrecalc', function() {
     getAttrs(['cat-crafts'], function(values) {
         setAttrs({
             cookingcatbonus: parseInt(values['cat-crafts'],10)||0,
@@ -12995,7 +12995,7 @@ on('change:cat-crafts', function() {
 });
   
 // <!-- Copy over Directed Spells Category Bonus-->
-on('change:cat-directed-spells', function() {
+on('change:cat-directed-spells change:skillrecalc', function() {
     getAttrs(['cat-directed-spells'], function(values) {
         setAttrs({
             fireboltcatbonus: parseInt(values['cat-directed-spells'],10)||0,
@@ -13009,7 +13009,7 @@ on('change:cat-directed-spells', function() {
 });
   
 // <!-- Copy over Influence Category Bonus-->
-on('change:cat-influence', function() {
+on('change:cat-influence change:skillrecalc', function() {
     getAttrs(['cat-influence'], function(values) {
         setAttrs({
             briberycatbonus: parseInt(values['cat-influence'],10)||0,
@@ -13026,7 +13026,7 @@ on('change:cat-influence', function() {
 });
   
 // <!-- Copy over Lore-General Category Bonus-->
-on('change:cat-lore-general', function() {
+on('change:cat-lore-general change:skillrecalc', function() {
     getAttrs(['cat-lore-general'], function(values) {
         setAttrs({
             culturelore1catbonus: parseInt(values['cat-lore-general'],10)||0,
@@ -13045,7 +13045,7 @@ on('change:cat-lore-general', function() {
 });
   
 // <!-- Copy over Lore-Magical Category Bonus-->
-on('change:cat-lore-magical', function() {
+on('change:cat-lore-magical change:skillrecalc', function() {
     getAttrs(['cat-lore-magical'], function(values) {
         setAttrs({
             artifactlorecatbonus: parseInt(values['cat-lore-magical'],10)||0,
@@ -13060,7 +13060,7 @@ on('change:cat-lore-magical', function() {
 });
   
 // <!-- Copy over Lore-Obscure Category Bonus-->
-on('change:cat-lore-obscure', function() {
+on('change:cat-lore-obscure change:skillrecalc', function() {
     getAttrs(['cat-lore-obscure'], function(values) {
         setAttrs({
             demondevillorecatbonus: parseInt(values['cat-lore-obscure'],10)||0,
@@ -13074,7 +13074,7 @@ on('change:cat-lore-obscure', function() {
 });
   
 // <!-- Copy over Lore-Technical Category Bonus-->
-on('change:cat-lore-technical', function() {
+on('change:cat-lore-technical change:skillrecalc', function() {
     getAttrs(['cat-lore-technical'], function(values) {
         setAttrs({
             herblorecatbonus: parseInt(values['cat-lore-technical'],10)||0,
@@ -13088,7 +13088,7 @@ on('change:cat-lore-technical', function() {
 });
   
 // <!-- Copy over Martial Arts-Striking Category Bonus-->
-on('change:cat-ma-striking', function() {
+on('change:cat-ma-striking change:skillrecalc', function() {
     getAttrs(['cat-ma-striking'], function(values) {
         setAttrs({
             boxingcatbonus: parseInt(values['cat-ma-striking'],10)||0,
@@ -13102,7 +13102,7 @@ on('change:cat-ma-striking', function() {
 });
   
 // <!-- Copy over Martial Arts-Sweeps Category Bonus-->
-on('change:cat-ma-sweeps', function() {
+on('change:cat-ma-sweeps change:skillrecalc', function() {
     getAttrs(['cat-ma-sweeps'], function(values) {
         setAttrs({
             blockingcatbonus: parseInt(values['cat-ma-sweeps'],10)||0,
@@ -13116,7 +13116,7 @@ on('change:cat-ma-sweeps', function() {
 });
   
 // <!-- Copy over Outdoor-Animal Category Bonus-->
-on('change:cat-outdoor-animal', function() {
+on('change:cat-outdoor-animal change:skillrecalc', function() {
     getAttrs(['cat-outdoor-animal'], function(values) {
         setAttrs({
             animalhandling1catbonus: parseInt(values['cat-outdoor-animal'],10)||0,
@@ -13134,7 +13134,7 @@ on('change:cat-outdoor-animal', function() {
 });
   
 // <!-- Copy over Outdoor-Environmental Category Bonus-->
-on('change:cat-outdoor-environ', function() {
+on('change:cat-outdoor-environ change:skillrecalc', function() {
     getAttrs(['cat-outdoor-environ'], function(values) {
         setAttrs({
             cavingcatbonus: parseInt(values['cat-outdoor-environ'],10)||0,
@@ -13150,7 +13150,7 @@ on('change:cat-outdoor-environ', function() {
 });
   
 // <!-- Copy over Power Awareness Category Bonus-->
-on('change:cat-power-awareness', function() {
+on('change:cat-power-awareness change:skillrecalc', function() {
     getAttrs(['cat-power-awareness'], function(values) {
         setAttrs({
             attunementcatbonus: parseInt(values['cat-power-awareness'],10)||0,
@@ -13164,7 +13164,7 @@ on('change:cat-power-awareness', function() {
 });
   
 // <!-- Copy over Power Manipulation Category Bonus-->
-on('change:cat-power-manipulation', function() {
+on('change:cat-power-manipulation change:skillrecalc', function() {
     getAttrs(['cat-power-manipulation'], function(values) {
         setAttrs({
             channelingcatbonus: parseInt(values['cat-power-manipulation'],10)||0,
@@ -13178,7 +13178,7 @@ on('change:cat-power-manipulation', function() {
 });
   
 // <!-- Copy over Science-Basic Category Bonus-->
-on('change:cat-science-basic', function() {
+on('change:cat-science-basic change:skillrecalc', function() {
     getAttrs(['cat-science-basic'], function(values) {
         setAttrs({
             basicmathcatbonus: parseInt(values['cat-science-basic'],10)||0,
@@ -13188,7 +13188,7 @@ on('change:cat-science-basic', function() {
 });
   
 // <!-- Copy over Science-Specialized Category Bonus-->
-on('change:cat-science-specialized', function() {
+on('change:cat-science-specialized change:skillrecalc', function() {
     getAttrs(['cat-science-specialized'], function(values) {
         setAttrs({
             advancedmathcatbonus: parseInt(values['cat-science-specialized'],10)||0,
@@ -13204,7 +13204,7 @@ on('change:cat-science-specialized', function() {
 });
   
 // <!-- Copy over Self-Control Category Bonus-->
-on('change:cat-self-control', function() {
+on('change:cat-self-control change:skillrecalc', function() {
     getAttrs(['cat-self-control'], function(values) {
         setAttrs({
             adrenalbalancecatbonus: parseInt(values['cat-self-control'],10)||0,
@@ -13229,7 +13229,7 @@ on('change:cat-self-control', function() {
 });
   
 // <!-- Copy over Special-Attacks Category Bonus-->
-on('change:cat-special-attacks', function() {
+on('change:cat-special-attacks change:skillrecalc', function() {
     getAttrs(['cat-special-attacks'], function(values) {
         setAttrs({
             brawlingcatbonus: parseInt(values['cat-special-attacks'],10)||0,
@@ -13247,7 +13247,7 @@ on('change:cat-special-attacks', function() {
 });
   
 // <!-- Copy over Special-Defenses Category Bonus-->
-on('change:cat-special-defenses', function() {
+on('change:cat-special-defenses change:skillrecalc', function() {
     getAttrs(['cat-special-defenses'], function(values) {
         setAttrs({
             adrenaldefensecatbonus: parseInt(values['cat-special-defenses'],10)||0,
@@ -13257,7 +13257,7 @@ on('change:cat-special-defenses', function() {
 });
   
 // <!-- Copy over Subterfuge-Attack Category Bonus-->
-on('change:cat-subterfuge-attack', function() {
+on('change:cat-subterfuge-attack change:skillrecalc', function() {
     getAttrs(['cat-subterfuge-attack'], function(values) {
         setAttrs({
             ambushcatbonus: parseInt(values['cat-subterfuge-attack'],10)||0,
@@ -13267,7 +13267,7 @@ on('change:cat-subterfuge-attack', function() {
 });
   
 // <!-- Copy over Subterfuge-Mechanics Category Bonus-->
-on('change:cat-subterfuge-mechanics', function() {
+on('change:cat-subterfuge-mechanics change:skillrecalc', function() {
     getAttrs(['cat-subterfuge-mechanics'], function(values) {
         setAttrs({
             camouflagecatbonus: parseInt(values['cat-subterfuge-mechanics'],10)||0,
@@ -13287,7 +13287,7 @@ on('change:cat-subterfuge-mechanics', function() {
 });
   
 // <!-- Copy over Subterfuge-Stealth Category Bonus-->
-on('change:cat-subterfuge-stealth', function() {
+on('change:cat-subterfuge-stealth change:skillrecalc', function() {
     getAttrs(['cat-subterfuge-stealth'], function(values) {
         setAttrs({
             hidingcatbonus: parseInt(values['cat-subterfuge-stealth'],10)||0,
@@ -13299,7 +13299,7 @@ on('change:cat-subterfuge-stealth', function() {
 });
   
 // <!-- Copy over Technical/Trade-General Category Bonus-->
-on('change:cat-tech-general', function() {
+on('change:cat-tech-general change:skillrecalc', function() {
     getAttrs(['cat-tech-general'], function(values) {
         setAttrs({
             beggingcatbonus: parseInt(values['cat-tech-general'],10)||0,
@@ -13316,7 +13316,7 @@ on('change:cat-tech-general', function() {
 });
   
 // <!-- Copy over Technical/Trade-Professional Category Bonus-->
-on('change:cat-tech-professional', function() {
+on('change:cat-tech-professional change:skillrecalc', function() {
     getAttrs(['cat-tech-professional'], function(values) {
         setAttrs({
             advertisingcatbonus: parseInt(values['cat-tech-professional'],10)||0,
@@ -13337,7 +13337,7 @@ on('change:cat-tech-professional', function() {
 });
   
 // <!-- Copy over Technical/Trade-Vocational Category Bonus-->
-on('change:cat-tech-vocational', function() {
+on('change:cat-tech-vocational change:skillrecalc', function() {
     getAttrs(['cat-tech-vocational'], function(values) {
         setAttrs({
             administrationcatbonus: parseInt(values['cat-tech-vocational'],10)||0,
@@ -13363,7 +13363,7 @@ on('change:cat-tech-vocational', function() {
 });
   
 // <!-- Copy over Urban Category Bonus-->
-on('change:cat-urban', function() {
+on('change:cat-urban change:skillrecalc', function() {
     getAttrs(['cat-urban'], function(values) {
         setAttrs({
             contactingcatbonus: parseInt(values['cat-urban'],10)||0,
@@ -13375,7 +13375,7 @@ on('change:cat-urban', function() {
 });
   
 // <!-- Copy over Weapon-1-H Concussion Category Bonus-->
-on('change:cat-weapon-1hconcussion', function() {
+on('change:cat-weapon-1hconcussion change:skillrecalc', function() {
     getAttrs(['cat-weapon-1hconcussion'], function(values) {
         setAttrs({
             weapon1hc1catbonus: parseInt(values['cat-weapon-1hconcussion'],10)||0,
@@ -13386,7 +13386,7 @@ on('change:cat-weapon-1hconcussion', function() {
 });
   
 // <!-- Copy over Weapon-1-H Edged Category Bonus-->
-on('change:cat-weapon-1hedged', function() {
+on('change:cat-weapon-1hedged change:skillrecalc', function() {
     getAttrs(['cat-weapon-1hedged'], function(values) {
         setAttrs({
             weapon1he1catbonus: parseInt(values['cat-weapon-1hedged'],10)||0,
@@ -13397,7 +13397,7 @@ on('change:cat-weapon-1hedged', function() {
 });
   
 // <!-- Copy over Weapon-2-Handed Category Bonus-->
-on('change:cat-weapon-2handed', function() {
+on('change:cat-weapon-2handed change:skillrecalc', function() {
     getAttrs(['cat-weapon-2handed'], function(values) {
         setAttrs({
             weapon2hand1catbonus: parseInt(values['cat-weapon-2handed'],10)||0,
@@ -13408,7 +13408,7 @@ on('change:cat-weapon-2handed', function() {
 });
   
 // <!-- Copy over Weapon-Missile Category Bonus-->
-on('change:cat-weapon-missile', function() {
+on('change:cat-weapon-missile change:skillrecalc', function() {
     getAttrs(['cat-weapon-missile'], function(values) {
         setAttrs({
             weaponmissile1catbonus: parseInt(values['cat-weapon-missile'],10)||0,
@@ -13419,7 +13419,7 @@ on('change:cat-weapon-missile', function() {
 });
   
 // <!-- Copy over Weapon-Missile Artillery Category Bonus-->
-on('change:cat-weapon-missileartillery', function() {
+on('change:cat-weapon-missileartillery change:skillrecalc', function() {
     getAttrs(['cat-weapon-missileartillery'], function(values) {
         setAttrs({
             weaponmissileart1catbonus: parseInt(values['cat-weapon-missileartillery'],10)||0,
@@ -13430,7 +13430,7 @@ on('change:cat-weapon-missileartillery', function() {
 });
   
 // <!-- Copy over Weapon-Pole Arms Category Bonus-->
-on('change:cat-weapon-polearms', function() {
+on('change:cat-weapon-polearms change:skillrecalc', function() {
     getAttrs(['cat-weapon-polearms'], function(values) {
         setAttrs({
             weaponpolearm1catbonus: parseInt(values['cat-weapon-polearms'],10)||0,
@@ -13441,7 +13441,7 @@ on('change:cat-weapon-polearms', function() {
 });
   
 // <!-- Copy over Weapon-Thrown Category Bonus-->
-on('change:cat-weapon-thrown', function() {
+on('change:cat-weapon-thrown change:skillrecalc', function() {
     getAttrs(['cat-weapon-thrown'], function(values) {
         setAttrs({
             weaponthrown1catbonus: parseInt(values['cat-weapon-thrown'],10)||0,
@@ -13452,7 +13452,7 @@ on('change:cat-weapon-thrown', function() {
 });
   
 // <!-- Copy over Same Realm Own Base Spells Category Bonus-->
-on('change:cat-srob', function() {
+on('change:cat-srob change:skillrecalc', function() {
     getAttrs(['cat-srob'], function(values) {
         setAttrs({
             'srob-list1catbonus': parseInt(values['cat-srob'],10)||0,
@@ -13470,7 +13470,7 @@ on('change:cat-srob', function() {
 });
   
 // <!-- Copy over Same Realm Open Spells Category Bonus-->
-on('change:cat-sropen', function() {
+on('change:cat-sropen change:skillrecalc', function() {
     getAttrs(['cat-sropen'], function(values) {
         setAttrs({
             'sropen-list1catbonus': parseInt(values['cat-sropen'],10)||0,
@@ -13488,7 +13488,7 @@ on('change:cat-sropen', function() {
 });
   
 // <!-- Copy over Same Realm Closed Spells Category Bonus-->
-on('change:cat-srclosed', function() {
+on('change:cat-srclosed change:skillrecalc', function() {
     getAttrs(['cat-srclosed'], function(values) {
         setAttrs({
             'srclosed-list1catbonus': parseInt(values['cat-srclosed'],10)||0,
@@ -13506,7 +13506,7 @@ on('change:cat-srclosed', function() {
 });
   
 // <!-- Copy over Same Realm Other Base Spells Category Bonus-->
-on('change:cat-srotherb', function() {
+on('change:cat-srotherb change:skillrecalc', function() {
     getAttrs(['cat-srotherb'], function(values) {
         setAttrs({
             'srotherb-list1catbonus': parseInt(values['cat-srotherb'],10)||0,
@@ -13519,7 +13519,7 @@ on('change:cat-srotherb', function() {
 });
   
 // <!-- Copy over Other Realm Open Spells Category Bonus-->
-on('change:cat-oropen', function() {
+on('change:cat-oropen change:skillrecalc', function() {
     getAttrs(['cat-oropen'], function(values) {
         setAttrs({
             'oropen-list1catbonus': parseInt(values['cat-oropen'],10)||0,
@@ -13532,7 +13532,7 @@ on('change:cat-oropen', function() {
 });
   
 // <!-- Copy over Other Realm Closed Spells Category Bonus-->
-on('change:cat-orclosed', function() {
+on('change:cat-orclosed change:skillrecalc', function() {
     getAttrs(['cat-orclosed'], function(values) {
         setAttrs({
             'orclosed-list1catbonus': parseInt(values['cat-orclosed'],10)||0,
@@ -13545,7 +13545,7 @@ on('change:cat-orclosed', function() {
 });
   
 // <!-- Copy over Other Realm Base Spells Category Bonus-->
-on('change:cat-orbase', function() {
+on('change:cat-orbase change:skillrecalc', function() {
     getAttrs(['cat-orbase'], function(values) {
         setAttrs({
             'orbase-list1catbonus': parseInt(values['cat-orbase'],10)||0,
@@ -13558,7 +13558,7 @@ on('change:cat-orbase', function() {
 });
   
 // <!-- Copy over Arcane Open Spells Category Bonus-->
-on('change:cat-arcopen', function() {
+on('change:cat-arcopen change:skillrecalc', function() {
     getAttrs(['cat-arcopen'], function(values) {
         setAttrs({
             'arcopen-list1catbonus': parseInt(values['cat-arcopen'],10)||0,
@@ -13571,7 +13571,7 @@ on('change:cat-arcopen', function() {
 });
   
 // <!-- Copy over Arcane Closed Spells Category Bonus-->
-on('change:cat-arcclosed', function() {
+on('change:cat-arcclosed change:skillrecalc', function() {
     getAttrs(['cat-arcclosed'], function(values) {
         setAttrs({
             'arcclosed-list1catbonus': parseInt(values['cat-arcclosed'],10)||0,
@@ -13584,7 +13584,7 @@ on('change:cat-arcclosed', function() {
 });
   
 // <!-- Copy over Arcane Base Spells Category Bonus-->
-on('change:cat-arcbase', function() {
+on('change:cat-arcbase change:skillrecalc', function() {
     getAttrs(['cat-arcbase'], function(values) {
         setAttrs({
             'arcbase-list1catbonus': parseInt(values['cat-arcbase'],10)||0,
@@ -13597,7 +13597,7 @@ on('change:cat-arcbase', function() {
 });
   
 // <!-- Copy over Arcane Other Base Spells Category Bonus-->
-on('change:cat-arcotherbase', function() {
+on('change:cat-arcotherbase change:skillrecalc', function() {
     getAttrs(['cat-arcotherbase'], function(values) {
         setAttrs({
             'arcotherbase-list1catbonus': parseInt(values['cat-arcotherbase'],10)||0,
