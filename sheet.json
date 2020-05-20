@@ -30,6 +30,24 @@
 			"descriptiontranslationkey": "standard-stat-bonus-based-on-categories-directions"
 		},
 		{
+			"attribute": "heightunit",
+			"displayname": "Unit for Height: ",
+			"displaytranslationkey": "height-unit",
+			"type": "text",
+			"default": "in",
+			"description": "Change from inches to centimeters or other length unit of choice.",
+			"descriptiontranslationkey": "change-height-unit"
+		},
+		{
+			"attribute": "weightunit",
+			"displayname": "Unit for weight: ",
+			"displaytranslationkey": "weight-unit",
+			"type": "text",
+			"default": "lbs.",
+			"description": "Change from pounds to kilograms or other weight unit of choice.",
+			"descriptiontranslationkey": "change-weight-unit"
+		},
+		{
 			"attribute": "coinsperpound",
 			"displayname": "Coins per Pound",
 			"displaytranslationkey": "coins-per-pound-n",
