@@ -327,6 +327,14 @@
 	margin: 0;
 	padding: 0;
 }
+.sheet-table-data-center-bottom-bold {
+    display: table-cell;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: bottom;
+	margin: 0;
+	padding: 0;
+}
 
 .sheet-table-data-center-sm {
     display: table-cell;
