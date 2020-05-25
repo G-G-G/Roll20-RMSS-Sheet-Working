@@ -14361,7 +14361,8 @@ on('change:totalweightcarried change:bonusweightallowance change:weight change:e
 		output['weightallowance'] = weightallowance;
 		let encumbrancepen = -8*Math.floor(totalweightcarry/weightallowance)*encumbscale;
 		output['encumbrancepen'] = encumbrancepen;
-		let weightpen = dbquickpen + encumbrancepen + 3*stmod;
+		//let weightpen = dbquickpen + encumbrancepen + 3*stmod;
+		let weightpen = encumbrancepen + 3*stmod;
 		let weightpenalty = Math.min(0, weightpen);
 		let minmanmod = Math.min(0, (encumbrancepen + 3*stmod)) + armormmm;
 		if (totalweightcarry < weightallowance){
